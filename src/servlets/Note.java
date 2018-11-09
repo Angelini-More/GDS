@@ -37,7 +37,11 @@ public class Note extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession s = SecurityLayer.checkSession(request);
+		if(s!=null){
+			
 		FreeMarker.process("note.html", data, response, getServletContext());
+		}
 	}
 
 	/**
