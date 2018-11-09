@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/Gestionale_Del_Sole">
+    <Resource 
+        name="jdbc/dbinstance_5229_1"
+        auth="Container" 
+        type="javax.sql.DataSource" 
+        driverClassName="com.mysql.jdbc.Driver" 
+        url="jdbc:mysql://95.110.171.18:3306/dbinstance_5229_1" 
+        username="5229_455"
+        password="germ6180" 
+        maxActive="30" 
+        maxIdle="5" 
+        maxWait="10000" 
+    />
+</Context>

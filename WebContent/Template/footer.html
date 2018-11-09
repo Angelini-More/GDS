@@ -1,0 +1,85 @@
+<div class="footer">
+	<div class="row">
+		<div class="col-md-6 margine">
+		  <p>STUDIO DI INGEGNERIA</p>
+		  <p>Via Petrarca, 56 - 64025 Pineto (TE)</p>
+		  <p>M. 348 3195045 E-mail: ing.delsole@hotmail.it</p>
+		</div>
+		<div class="col-md-6 margine">
+		  <p>&copy; All right reserved</p>
+		  
+		</div>
+	</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+ <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+ <script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
+ 
+<script src="Template/bootstrap/js/bootstrap.js"></script>
+	<!-- <script src="Template/bootstrap/js/bootstrap.min.js"></script>-->
+	<script src="Template/bootstrap/js/npm.js"></script>
+	
+	
+  <script>
+        var table = '#mytable';
+        $('#maxRows').on('change',function(){
+		  	$('.pagination').html('');
+		  	var trnum = 0 ;	
+		  	var maxRows = parseInt($(this).val());
+		  	var totalRows = $(table+' tbody tr').length;
+			 $(table+' tr:gt(0)').each(function(){	
+			 	trnum++;				
+			 	if (trnum > maxRows ){		
+			 		$(this).hide();		
+			 	}if (trnum <= maxRows ){$(this).show();}
+			 });										
+			 if (totalRows > maxRows){						
+			 	var pagenum = Math.ceil(totalRows/maxRows);	
+			 	for (var i = 1; i <= pagenum ;){
+			 	$('.pagination').append('<li data-page="'+i+'">\
+								      <span>'+ i++ +'<span class="sr-only">(current)</span></span>\
+								    </li>').show();
+			 	}											
+			} 												
+			$('.pagination li:first-child').addClass('active');
+			$('.pagination li').on('click',function(){	
+				var pageNum = $(this).attr('data-page');
+				var trIndex = 0 ;						
+				$('.pagination li').removeClass('active');
+				$(this).addClass('active');				 
+				$(table+' tr:gt(0)').each(function(){	
+				 	trIndex++;	
+				 	if (trIndex > (maxRows*pageNum) || trIndex <= ((maxRows*pageNum)-maxRows)){
+				 		$(this).hide();		
+				 	}else {$(this).show();} 				
+				}); 										
+            });	
+        });
+      
+    </script>	
+
+<script>
+function myFunction(c){
+	var r=c;
+	var x=document.getElementById(r);
+	x.remove();
+	$("." + r).append(("Eliminare? <button type='submit' name='tasto' value='si' class='btn btn-secondary'>SI</button> <input type='hidden' name='id' value='" + r + "' > <a href='javascript:history.go(0);'><button  type='button' class='btn btn-primary'>NO</button></a>"));
+}
+
+function myFunctionScad(c,d){
+	var r=c;
+	var l=d
+	var x=document.getElementById(r);
+	x.remove();
+	$("." + r).append(("Eliminare? <button type='submit' name='tasto' value='elimina' class='btn btn-secondary'>SI</button> <input type='hidden' name='idcorso' value='" + l + "' ><input type='hidden' name='idcorsista' value='" + r + "' > <a href='javascript:history.go(0);'><button  type='button' class='btn btn-primary'>NO</button></a>"));
+}
+
+
+</script>
+
+</script>
+</body>
+</html>
