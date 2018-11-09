@@ -39,7 +39,8 @@ public class Note extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
-			
+			int idazie= (int) s.getAttribute("id");
+			ResultSet a=
 		FreeMarker.process("note.html", data, response, getServletContext());
 		}
 	}
