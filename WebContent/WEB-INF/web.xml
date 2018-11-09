@@ -92,4 +92,12 @@
     <servlet-name>Auditt</servlet-name>
     <url-pattern>/auditt</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>Note</servlet-name>
+    <servlet-class>Servlets.Note</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Note</servlet-name>
+    <url-pattern>/note</url-pattern>
+  </servlet-mapping>
 </web-app>
