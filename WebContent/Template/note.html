@@ -3,7 +3,7 @@
 		<div class="row">
 		<div class="col-md-12">
 			<center><h2>Note</h2></center>
-		<form class="form-horizontal" method="POST" action="">
+		<form class="form-horizontal" method="POST" action="Note">
 		  <div class="form-group">
 		  	<div class="col-sm-offset-2 col-sm-8">
 
@@ -17,20 +17,22 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr>
-		      <td class="mod1">04/01/2016</td>
-		      <td class="mod2">Visa - 3412Visa - 3412Visa - 3412Visa - 3412Visa - 3412Visa - 3412Visa - 3412Visa - 3412Visa - 3412Visa - 3412Visa - 3412Visa - 3412</td>
-		      <td class="mod"><a href="ModificaNota?id=${Lista.id}"><img class="icona" src="Template/img/modifica.png"></a></td>
+		  <#if note ??>
+		   <#list note as Note>
+		   <tr>
+		      <td class="mod1">${Note.data}</td>
+		      <td class="mod2">${Note.testo}</td>
+		      <td class="mod"><a href="ModificaNota?id=${Note.id}"><img class="icona" src="Template/img/modifica.png"></a></td>
 		      	  		<!-- Trigger/Open The Modal -->
 			  		<td class="mod">
-			  		<button type="button"  data-toggle="modal" data-target="#exampleModal-${Lista.id}">
+			  		<button type="button"  data-toggle="modal" data-target="#exampleModal-${Note.id}">
 			  		<img src="Template/img/elimina.png" class="icona">
 			  		</button>
 			  		
 									  	
 <!-- Modal -->
-<form method="POST" action="Note">
-<div class="modal fade" id="exampleModal-${Lista.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="exampleModal-${Note.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -45,28 +47,29 @@
       <div class="modal-footer">
       
         <button type="submit" name="tasto" value="si" class="btn btn-secondary">SI</button>
-         <input type="hidden" name="id" value="${Lista.id}">
+         <input type="hidden" name="id" value="${Note.id}">
         <button type="button" class="btn btn-primary" data-dismiss="modal">NO</button>
       </div>
     </div>
   </div>
 </div>
-</form>
+
 					
 			  		</td>
 		    </tr>
-		    
+		    </#list>
+		    </#if>
 		  </tbody>
 		</table>
 
 
 		  		<br><br>
-		      <textarea class="form-control" rows="3" placeholder="Scrivi qui le tue note"></textarea>
+		      <textarea class="form-control" rows="3" placeholder="Scrivi qui le tue note" name="testo"></textarea>
 		    </div>
 		  </div>
 		    <div class="form-group">
 		    <div class="col-sm-offset-2 col-sm-8">
-		      <button type="submit" class="btn btn-default">SALVA</button>
+		      <button type="submit" class="btn btn-default">INSERISCI</button>
 		    </div>
 		  </div>
 		</form>

@@ -3,11 +3,13 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import model.Azienda;
+import model.Note;
 import util.DataUtil;
 import util.Database;
 
@@ -277,6 +279,29 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
               lis.add(n);
 			}
 			}
+		}
+		Database.close();
+		return lis;
+		
+		
+	}
+	
+	public static List<Note> noteaz(int id) throws Exception{
+		List<Note> lis=new ArrayList<Note>();
+		Database.connect();
+		ResultSet listaz=Database.selectRecord("note","idazienda=" + id);
+		while(listaz.next()){
+			String testo=listaz.getString("testo");
+		
+				int idn=listaz.getInt("id");
+				
+            	System.out.println("asddasfrdffasf");
+             Date data=listaz.getDate("data");
+             System.out.println("dataaaaaaaaaaaa");
+                Note n=new Note(idn,testo,data);
+              lis.add(n);
+			
+			
 		}
 		Database.close();
 		return lis;

@@ -1,13 +1,13 @@
 package model;
 
-
+import java.util.Date;
 
 public class Note {
 	private int id;
 	private String testo;
-	private String data;
+	private Date data;
 	
-	public Note(int id, String testo, String data) {
+	public Note(int id, String testo, Date data) {
 		this.id=id;
 		this.testo=testo;
 		this.data=data;
@@ -29,7 +29,7 @@ public class Note {
 		this.testo=testo;
 	}
 	
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 	

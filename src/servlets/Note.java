@@ -1,8 +1,14 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import dao.AziendaDAO;
 import dao.CorsistiDAO;
 import dao.CorsoDAO;
+import util.Database;
 import util.FreeMarker;
 import util.SecurityLayer;
 
@@ -40,7 +47,14 @@ public class Note extends HttpServlet {
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
 			int idazie= (int) s.getAttribute("id");
-			ResultSet a=
+			try {
+				data.put("note", AziendaDAO.noteaz(idazie));
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		FreeMarker.process("note.html", data, response, getServletContext());
 		}
 	}
@@ -56,17 +70,28 @@ public class Note extends HttpServlet {
 		System.out.println(ida + "id azienda");
 		
 			try {
-				data.put("nomeaz", AziendaDAO.specifica(ida));
-			data.put("corsi", CorsoDAO.corsi());
-			data.put("corsisti", CorsistiDAO.corsisti(ida));
+				Database.connect();
+				Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
+				 Date today = calendar.getTime();
+				 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				 System.out.println(simpleDateFormat.format(calendar.getTime()));
+				 System.out.println(simpleDateFormat.format(today) + "datacorrente");
+				 String testo=request.getParameter("testo");
+				 Map<String,Object> as=new HashMap<String,Object>();
+				 as.put("testo", testo);
+				 as.put("data", simpleDateFormat.format(today));
+				 as.put("idazienda", ida);
+				 Database.insertRecord("note", as);
+				 
+			Database.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		FreeMarker.process("formazione.html", data, response, getServletContext());
+			response.sendRedirect("Note");
 		}else{
-			response.sendRedirect("Log");
+			response.sendRedirect("Note");
 		}
 	}
 
