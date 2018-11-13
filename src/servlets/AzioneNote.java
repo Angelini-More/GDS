@@ -27,14 +27,14 @@ import util.SecurityLayer;
 /**
  * Servlet implementation class Note
  */
-@WebServlet("/Note")
-public class Note extends HttpServlet {
+@WebServlet("/AzioneNote")
+public class AzioneNote extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Map data= new HashMap<String, Object>();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Note() {
+    public AzioneNote() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -66,10 +66,15 @@ public class Note extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
+			String decisione=request.getParameter("tasto");
+			System.out.println("decisione "+decisione);
 		int ida=(int) s.getAttribute("id");
 		System.out.println(ida + "id azienda");
-		
+		int idnote=Integer.parseInt(request.getParameter("idnote"));
+		System.out.println("id note " + idnote);
 			try {
+				if(decisione=="inserisci") {
+					System.out.println("entro qui??");
 				Database.connect();
 				Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
 				 Date today = calendar.getTime();
@@ -84,14 +89,22 @@ public class Note extends HttpServlet {
 				 Database.insertRecord("note", as);
 				 
 			Database.close();
-		} catch (Exception e) {
+		}
+			if(decisione.equals("si")) {
+				System.out.println("elimina");
+				Database.connect();
+				Database.deleteRecord("note", "note.id=" + idnote);
+				Database.close();
+			}
+				
+			} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-			response.sendRedirect("Note");
+			response.sendRedirect("AzioneNote");
 		}else{
-			response.sendRedirect("Note");
+			response.sendRedirect("AzioneNote");
 		}
 	}
 
