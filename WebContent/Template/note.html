@@ -2,7 +2,11 @@
 
 		<div class="row">
 		<div class="col-md-12">
-			<center><h2>Note</h2></center>
+		<#if azienda ??>
+		
+			<center><h2>Note dell'azienda ${azienda.nome}</h2></center>
+			
+			</#if>
 		<form class="form-horizontal" method="POST" action="AzioneNote">
 		  <div class="form-group">
 		  	<div class="col-sm-offset-2 col-sm-8">
@@ -22,7 +26,7 @@
 		   <tr>
 		      <td class="mod1">${Note.data}</td>
 		      <td class="mod2">${Note.testo}</td>
-		      <td class="mod"><a href="ModificaNota?id=${Note.getId()}"><img class="icona" src="Template/img/modifica.png"></a></td>
+		      <td class="mod"><a href="ModificaNota?idnota=${Note.getId()}"><img class="icona" src="Template/img/modifica.png"></a></td>
 		      	  		<!-- Trigger/Open The Modal -->
 			  		<td class="mod">
 			  		<button type="button"  data-toggle="modal" data-target="#exampleModal-${Note.getId()}">

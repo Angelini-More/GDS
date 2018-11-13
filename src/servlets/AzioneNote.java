@@ -48,15 +48,17 @@ public class AzioneNote extends HttpServlet {
 		if(s!=null){
 			int idazie= (int) s.getAttribute("id");
 			try {
-				data.put("note", AziendaDAO.noteaz(idazie));
 				
+				data.put("note", AziendaDAO.noteaz(idazie));
+				data.put("azienda", AziendaDAO.specifica(idazie));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 		FreeMarker.process("note.html", data, response, getServletContext());
-		}
+		} else
+			response.sendRedirect("Log");
 	}
 
 	/**
@@ -73,7 +75,7 @@ public class AzioneNote extends HttpServlet {
 		int idnote=Integer.parseInt(request.getParameter("idnote"));
 		System.out.println("id note " + idnote);
 			try {
-				if(decisione=="inserisci") {
+				if(decisione.equals("inserisci")) {
 					System.out.println("entro qui??");
 				Database.connect();
 				Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
@@ -104,7 +106,7 @@ public class AzioneNote extends HttpServlet {
 		
 			response.sendRedirect("AzioneNote");
 		}else{
-			response.sendRedirect("AzioneNote");
+			response.sendRedirect("Log");
 		}
 	}
 

@@ -8,12 +8,15 @@
 		<div class="row spazio_fondo">
 		<div class="col-md-12">
 	<form method="POST" action="ModificaNota">
-	
-	<textarea class="form-control" rows="3" placeholder="" name="testo"></textarea>  
+	<#if nota ??>
+	<#list nota as Nota>
+	<textarea class="form-control" rows="3" placeholder="" name="testo">${Nota.testo}</textarea>  
 		  <button type="submit" class="btn btn-default" name="decisione" value="salva">SALVA</button>
+		  <input type="hidden" name="idnota" value="${Nota.id}">
 		  <button type="submit" class="btn btn-default" name="decisione" value="annulla">ANNULLA</button>
   
-  
+  </#list>
+  </#if>
 	</form>
 	
 

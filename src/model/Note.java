@@ -13,6 +13,12 @@ public class Note {
 		this.data=data;
 	}
 	
+	public Note(int id, String testo) {
+		this.id=id;
+		this.testo=testo;
+		
+	}
+	
 	public int getId() {
 		return id;
 	}
