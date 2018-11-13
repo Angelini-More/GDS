@@ -3,7 +3,7 @@
 		<div class="row">
 		<div class="col-md-12">
 			<center><h2>Note</h2></center>
-		<form class="form-horizontal" method="POST" action="Note">
+		<form class="form-horizontal" method="POST" action="AzioneNote">
 		  <div class="form-group">
 		  	<div class="col-sm-offset-2 col-sm-8">
 
@@ -22,17 +22,17 @@
 		   <tr>
 		      <td class="mod1">${Note.data}</td>
 		      <td class="mod2">${Note.testo}</td>
-		      <td class="mod"><a href="ModificaNota?id=${Note.id}"><img class="icona" src="Template/img/modifica.png"></a></td>
+		      <td class="mod"><a href="ModificaNota?id=${Note.getId()}"><img class="icona" src="Template/img/modifica.png"></a></td>
 		      	  		<!-- Trigger/Open The Modal -->
 			  		<td class="mod">
-			  		<button type="button"  data-toggle="modal" data-target="#exampleModal-${Note.id}">
+			  		<button type="button"  data-toggle="modal" data-target="#exampleModal-${Note.getId()}">
 			  		<img src="Template/img/elimina.png" class="icona">
 			  		</button>
 			  		
 									  	
 <!-- Modal -->
-
-<div class="modal fade" id="exampleModal-${Note.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<form method="POST" action="AzioneNote">
+<div class="modal fade" id="exampleModal-${Note.getId()}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -47,13 +47,13 @@
       <div class="modal-footer">
       
         <button type="submit" name="tasto" value="si" class="btn btn-secondary">SI</button>
-         <input type="hidden" name="id" value="${Note.id}">
+         <input type="hidden" name="idnote" value="${Note.getId()}">
         <button type="button" class="btn btn-primary" data-dismiss="modal">NO</button>
       </div>
     </div>
   </div>
 </div>
-
+</form>
 					
 			  		</td>
 		    </tr>
@@ -69,7 +69,7 @@
 		  </div>
 		    <div class="form-group">
 		    <div class="col-sm-offset-2 col-sm-8">
-		      <button type="submit" class="btn btn-default">INSERISCI</button>
+		      <button type="submit" name="tasto" value="inserisci" class="btn btn-default">INSERISCI</button>
 		    </div>
 		  </div>
 		</form>

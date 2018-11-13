@@ -295,9 +295,9 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 		
 				int idn=listaz.getInt("id");
 				
-            	System.out.println("asddasfrdffasf");
+            
              Date data=listaz.getDate("data");
-             System.out.println("dataaaaaaaaaaaa");
+           
                 Note n=new Note(idn,testo,data);
               lis.add(n);
 			
