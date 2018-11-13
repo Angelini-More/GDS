@@ -1,0 +1,48 @@
+<#include "headerhome.html">
+
+		<div class="row">
+		<div class="col-md-12">
+			<center><h2>Note</h2></center>
+		<form class="form-horizontal" method="POST" action="">
+		  <div class="form-group">
+		  	<div class="col-sm-offset-2 col-sm-8">
+
+		  	<table id="mytable" class="table table-bordered table-striped">
+		  <thead>
+		    <tr>
+		     <th>Situazione</th>
+		     <th>Documento</th>
+		     <th>Data</th>
+		     <th>Azione</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  <#if note ??>
+		   <#list note as Note>
+		   <tr>
+		      <td><img src="Template/img/fatto.png" class="icona"></td>
+		      <td>DOCUMENTO DEL CAZZO GRANDE</td>
+		      <td>
+		      		<input class="form-control" type="date" value="2018-11-13" id="example-date-input">
+		      </td>
+			  <td>
+			  		<button type="submit" class="btn btn-default" name="tasto" value="">FATTO
+			  		</button>
+			  </td>
+		   </tr>
+		   </#list>
+		   </#if>
+		  </tbody>
+		</table>
+		</div>
+		</div>
+		</form>
+		<div class="row spazio_fondo">
+		</div>
+	</div>
+</div>
+</div>
+
+
+
+<#include "footer.html">
