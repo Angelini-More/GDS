@@ -2,7 +2,7 @@
 
 		<div class="row">
 		<div class="col-md-12">
-			<center><h2>DOCUMENTO PRIVACY</h2></center>
+			<center><h2>DOCUMENTO SICUREZZA</h2></center>
 		<form class="form-horizontal" method="POST" action="">
 		  <div class="form-group">
 		  	<div class="col-sm-offset-2 col-sm-8">
@@ -17,11 +17,11 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  <#if note ??>
-		   <#list note as Note>
+		  <#if documentis ??>
+		   <#list documentis as Documentis>
 		   <tr>
 		      <td><img src="Template/img/fatto.png" class="icona"></td>
-		      <td>DOCUMENTO DEL CAZZO GRANDE</td>
+		      <td>${Documentis.documento}</td>
 		      <td>
 		      		<input class="form-control" type="date" value="2018-11-13" id="example-date-input">
 		      </td>

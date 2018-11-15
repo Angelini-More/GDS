@@ -109,11 +109,11 @@
     <url-pattern>/modifica_nota</url-pattern>
   </servlet-mapping>
     <servlet>
-    <servlet-name>DocPrivacy</servlet-name>
-    <servlet-class>Servlets.DocPrivacy</servlet-class>
+    <servlet-name>DocSicurezza</servlet-name>
+    <servlet-class>Servlets.DocSicurezza</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>DocPrivacy</servlet-name>
-    <url-pattern>/docprivacy</url-pattern>
+    <servlet-name>DocSicurezza</servlet-name>
+    <url-pattern>/docsicurezza</url-pattern>
   </servlet-mapping>
 </web-app>
