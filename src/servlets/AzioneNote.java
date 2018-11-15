@@ -72,8 +72,8 @@ public class AzioneNote extends HttpServlet {
 			System.out.println("decisione "+decisione);
 		int ida=(int) s.getAttribute("id");
 		System.out.println(ida + "id azienda");
-		int idnote=Integer.parseInt(request.getParameter("idnote"));
-		System.out.println("id note " + idnote);
+		
+		
 			try {
 				if(decisione.equals("inserisci")) {
 					System.out.println("entro qui??");
@@ -93,6 +93,8 @@ public class AzioneNote extends HttpServlet {
 			Database.close();
 		}
 			if(decisione.equals("si")) {
+				int idnote=Integer.parseInt(request.getParameter("idnote"));
+				System.out.println("id note " + idnote);
 				System.out.println("elimina");
 				Database.connect();
 				Database.deleteRecord("note", "note.id=" + idnote);
