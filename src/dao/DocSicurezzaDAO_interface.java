@@ -11,4 +11,8 @@ public interface DocSicurezzaDAO_interface {
 		return null;
 	}
 	
+	
+	public static List<DocSicurezza> documentisicurezza(int id){
+		return null;
+	}
 }
