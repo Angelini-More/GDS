@@ -100,12 +100,20 @@
     <servlet-name>AzioneNote</servlet-name>
     <url-pattern>/note</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>ModificaNota</servlet-name>
     <servlet-class>Servlets.ModificaNota</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ModificaNota</servlet-name>
     <url-pattern>/modifica_nota</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>DocPrivacy</servlet-name>
+    <servlet-class>Servlets.DocPrivacy</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DocPrivacy</servlet-name>
+    <url-pattern>/docprivacy</url-pattern>
   </servlet-mapping>
 </web-app>
