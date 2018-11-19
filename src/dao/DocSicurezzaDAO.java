@@ -5,11 +5,13 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import model.DocSicurezza;
 import util.Database;
@@ -55,8 +57,28 @@ public static List<DocSicurezza> documentisicurezza(int id){
 				 //DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
 			      //datas = dateFormat.parse(datap);
 				//}else {
-			
+			int durata=g.getInt("documentisicurezza.durata");
 				 Date datas=g.getDate("sicurezzadoc.data");
+				Calendar datan= Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
+				Calendar datao= Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
+				
+				SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
+				
+				String r=formdata.format(datao.getTime());
+				System.out.println(r+" stringa data odierna");
+				Date date1=formdata.parse(r);
+				
+				System.out.println(datao.getTime()+" data odierna");
+				datan.setTime(datas);
+				System.out.println(formdata.format(datan.getTime())+" data originaria");
+				
+				System.out.println(durata+" durataaaaaa");
+				datan.add(Calendar.YEAR, durata);
+				String h=formdata.format(datan.getTime());
+				Date date2=formdata.parse(h);
+				System.out.println(formdata.format(datan.getTime())+" data aggiornata");
+				int compar=date1.compareTo(date2);
+				System.out.println(compar+"comparazione date");
 				 /*if(datas.equals("NULL")) {}else {
 				 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				
