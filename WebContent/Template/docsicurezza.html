@@ -21,9 +21,11 @@
 		   <#list documentis as Documentis>
 		   <form class="form-horizontal" method="POST" action="DocSicurezza">
 		   <tr>
-		   <#if Documentis.flag==0><td>NON FATTO</td></#if>
+		   <#if Documentis.flag==0><td>
+		   <center><img src="Template/img/non_fatto.png" class="icona"></center></td>
+		   </#if>
 		   <#if Documentis.flag==1>
-		      <td><img src="Template/img/fatto.png" class="icona"></td>
+		      <td><center><img src="Template/img/fatto1.png" id="icona1"></center></td>
 		      </#if>
 		      <td>${Documentis.documento}</td>
 		     
