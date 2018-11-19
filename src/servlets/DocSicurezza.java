@@ -99,10 +99,25 @@ public class DocSicurezza extends HttpServlet {
 		Map<String,Object> agg=new HashMap<String,Object>();
 		if(s!=null){
 			int idd=Integer.parseInt(request.getParameter("tasto"));
-			
+			int scelta=Integer.parseInt(request.getParameter("scelta"));
+			if(scelta==0) {
 			String dat=request.getParameter("data");
 			
 			DocSicurezzaDAO.aggiornadocsic(dat,idd);
+			} else
+			{
+				try {
+					Database.connect();
+					agg.put("data", "0001-01-01");
+					agg.put("flag", 0);
+					Database.updateRecord("sicurezzadoc", agg, "sicurezzadoc.id="+idd);
+					Database.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		
+			}
 		response.sendRedirect("DocSicurezza");
 		}
 	}
