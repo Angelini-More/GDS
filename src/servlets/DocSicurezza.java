@@ -120,6 +120,9 @@ public class DocSicurezza extends HttpServlet {
 			}
 		response.sendRedirect("DocSicurezza");
 		}
+		else {
+			response.sendRedirect("Log");
+		}
 	}
 
 }
