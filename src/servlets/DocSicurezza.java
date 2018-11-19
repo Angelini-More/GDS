@@ -57,17 +57,17 @@ public class DocSicurezza extends HttpServlet {
 			while(r.next()) {
 				cont++;
 			}
-			Date datas=null;
+			//Date datas=null;
 			if(cont==0) {
 				ResultSet p=Database.selectRecord("documentisicurezza");
 				while(p.next()) {
 					int ids=p.getInt("id");
 					agg.put("flag", 0);
-					String datap="0000-00-00";
-					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					String datap="NULL";
+					//SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				
-				      datas = simpleDateFormat.parse(datap);
-					agg.put("data", simpleDateFormat.format(datas));
+				      //datas = simpleDateFormat.parse(datap);
+					//agg.put("data",datap );//simpleDateFormat.format(datas)
 					agg.put("iddocsic", ids);
 					agg.put("idazienda", ida);
 					Database.insertRecord("sicurezzadoc", agg);
@@ -93,7 +93,18 @@ public class DocSicurezza extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		FreeMarker.process("docprivacy.html", data, response, getServletContext());
+		
+		HttpSession s = SecurityLayer.checkSession(request);
+		
+		Map<String,Object> agg=new HashMap<String,Object>();
+		if(s!=null){
+			int idd=Integer.parseInt(request.getParameter("tasto"));
+			
+			String dat=request.getParameter("data");
+			
+			DocSicurezzaDAO.aggiornadocsic(dat,idd);
+		response.sendRedirect("DocSicurezza");
+		}
 	}
 
 }

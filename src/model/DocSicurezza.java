@@ -5,7 +5,7 @@ import java.util.Date;
 public class DocSicurezza {
 	private int id;
 	private String documento;
-	
+	private String data2;
 	private Date data;
 	private int durata;
 	private int flag;
@@ -22,6 +22,13 @@ public class DocSicurezza {
 		this.documento=documento;
 	this.flag=flag;
 		this.data=data;
+	}
+	
+	public DocSicurezza(int id, String documento, String data2, int flag) {
+		this.id=id;
+		this.documento=documento;
+	this.flag=flag;
+		this.data2=data2;
 	}
 	
 	public int getId(){
@@ -62,5 +69,13 @@ public class DocSicurezza {
 	
 	public void setData(Date data){
 		this.data = data;
+	}
+	
+	public String getData2(){
+		return data2;
+	}
+	
+	public void setData2(String data2){
+		this.data2 = data2;
 	}
 }

@@ -3,7 +3,7 @@
 		<div class="row">
 		<div class="col-md-12">
 			<center><h2>DOCUMENTO SICUREZZA</h2></center>
-		<form class="form-horizontal" method="POST" action="">
+		
 		  <div class="form-group">
 		  	<div class="col-sm-offset-2 col-sm-8">
 
@@ -19,6 +19,7 @@
 		  <tbody>
 		  <#if documentis ??>
 		   <#list documentis as Documentis>
+		   <form class="form-horizontal" method="POST" action="DocSicurezza">
 		   <tr>
 		   <#if Documentis.flag==0><td>NON FATTO</td></#if>
 		   <#if Documentis.flag==1>
@@ -27,25 +28,31 @@
 		      <td>${Documentis.documento}</td>
 		     
 		      <td>
+		      <#assign data1="01/01/0001">
+		    
+
+		     
+		      <#if Documentis.getData()!="1-gen-0001"?date>
 		      ${Documentis.data}
-		      <#if Documentis.data ??>
-		      		<input class="form-control" type="date" value="INSERISCI DATA" id="example-date-input">
-		      		<#else>
-		      		<input class="form-control" type="date" value="${Documentis.data}" id="example-date-input">
-		      		</#if>
+		      <#else>
+		      <input class="form-control" type="date" name="data" id="example-date-input">
+		      </#if>
+		      		
+		      		
 		      </td>
 			  <td>
-			  		<button type="submit" class="btn btn-default" name="tasto" value="">FATTO
+			  		<button type="submit" class="btn btn-default" name="tasto" value="${Documentis.id}">FATTO
 			  		</button>
 			  </td>
 		   </tr>
+		   </form>
 		   </#list>
 		   </#if>
 		  </tbody>
 		</table>
 		</div>
 		</div>
-		</form>
+		
 		<div class="row spazio_fondo">
 		</div>
 	</div>
