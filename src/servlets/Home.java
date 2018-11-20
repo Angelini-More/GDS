@@ -44,7 +44,7 @@ public class Home extends HttpServlet {
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
 		data.clear();
-		data.put("lista", AziendaDAO.lista());
+		data.put("lista", AziendaDAO.lista((int) s.getAttribute("idarea")));
 
   		
   		

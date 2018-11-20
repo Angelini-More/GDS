@@ -11,20 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.AziendaDAO;
 import util.FreeMarker;
 import util.SecurityLayer;
 
 /**
- * Servlet implementation class Area
+ * Servlet implementation class Privacy
  */
-@WebServlet("/Area")
-public class Area extends HttpServlet {
+@WebServlet("/Privacy")
+public class Privacy extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Map data= new HashMap<String, Object>();  
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Area() {
+    public Privacy() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +35,17 @@ public class Area extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		FreeMarker.process("area.html", data, response, getServletContext());
+		HttpSession s = SecurityLayer.checkSession(request);
+		if(s!=null){
+		data.clear();
+		data.put("lista", AziendaDAO.lista((int) s.getAttribute("idarea")));
+
+  		
+  		
+  	  FreeMarker.process("home.html", data, response, getServletContext());
+		}else{
+			response.sendRedirect("Log");
+		}
 	}
 
 	/**
@@ -43,20 +54,40 @@ public class Area extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession s = SecurityLayer.checkSession(request);
-		int areascelta = Integer.parseInt(request.getParameter("areascelta"));
-		s.setAttribute("idarea", areascelta);
-		if(areascelta==1) {
-			response.sendRedirect("Home");
-		}
-		if(areascelta==2) {
-			FreeMarker.process("haccp.html", data, response, getServletContext());
-		}
-		if(areascelta==3) {
-			response.sendRedirect("Privacy");
-		}
-		if(areascelta==4) {
-		FreeMarker.process("antincendio.html", data, response, getServletContext());
-		}
+		if(s!=null){
+		String premuto=request.getParameter("tasto");
+		
+		
+		
+		if(premuto.equals("si")){
+			int id=Integer.parseInt(request.getParameter("id"));
+			System.out.println(id + "idddddddddddd");
+			AziendaDAO.cancella(id);
+			doGet(request, response);
+			}
+		
+		if(premuto.equals("cerca")){
+		
+		String cercaaz=request.getParameter("nomeaz");
+		String cercacom=request.getParameter("comune");
+		
+			try {
+				data.put("lista", AziendaDAO.cerca(cercaaz, cercacom));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			data.put("titolo", 1);
+			 FreeMarker.process("home.html", data, response, getServletContext());
+			
+			}
+		
+		
+		
+		
+	}else{
+		response.sendRedirect("Log");
+	}
 	}
 
 }

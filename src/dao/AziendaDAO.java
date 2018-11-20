@@ -16,12 +16,14 @@ import util.Database;
 
 public class AziendaDAO implements AziendaDAO_interface {
 	
-	public static List<Azienda> lista(){
+	public static List<Azienda> lista(int area){
 		List<Azienda> aziende=new ArrayList<Azienda>();
 		try {
 			Database.connect();
-			ResultSet listaaz=Database.selectRecordCond("azienda"," CAST(numero AS SIGNED) ASC");
+			ResultSet listaaz=Database.selectRecordCond2("azienda"," azienda.idarea=" + area, " CAST(numero AS SIGNED) ASC");
 			while(listaaz.next()){
+				int idarea=listaaz.getInt("idarea");
+				
 				int id=listaaz.getInt("id");
 				String numero=listaaz.getString("numero");
 				String nome=listaaz.getString("nome");
@@ -29,6 +31,10 @@ public class AziendaDAO implements AziendaDAO_interface {
 				
 				Azienda c=new Azienda(id,numero, nome,comune);
 				aziende.add(c);
+				
+				
+			
+
 			}
 			Database.close();
 			
@@ -130,8 +136,9 @@ public class AziendaDAO implements AziendaDAO_interface {
 				String auditt=az.getString("auditt");
 			
 				String eventuali=az.getString("eventuali");
-				
-				azi=new Azienda(id,numero,nome,comune,rappresentante,sedel,sedeo,codicef,iva,email,pec,cellulare,telefono,ateco,auditc,auditt,eventuali);
+				int idarea=az.getInt("idarea");
+				System.out.println(idarea+" id area percheeeeeee");
+				azi=new Azienda(id,numero,nome,comune,rappresentante,sedel,sedeo,codicef,iva,email,pec,cellulare,telefono,ateco,auditc,auditt,eventuali,idarea);
 				
 			}
 			Database.close();

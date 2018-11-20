@@ -97,6 +97,7 @@ auditt=giornot+"/"+meset+"/"+annot;}
 		agg.put("ateco", request.getParameter("ateco"));
 		agg.put("auditc", auditc);
 		agg.put("auditt", auditt);
+		agg.put("idarea", s.getAttribute("idarea"));
 		agg.put("eventuali", request.getParameter("eventuali"));
 		
 		try {

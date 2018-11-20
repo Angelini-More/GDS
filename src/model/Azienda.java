@@ -27,9 +27,10 @@ public class Azienda {
 	private String cognome;
 	private int idcorsista;
 	private int idcorso;
+	private int idarea;
 	
 	
-	public Azienda(int id,String numero, String nome, String comune, String rappresentante, String sede_legale, String sede_operativa, String codice_fiscale, String iva, String email, String pec, String cellulare, String telefono, String ateco, String auditc, String auditt, String eventuali){
+	public Azienda(int id,String numero, String nome, String comune, String rappresentante, String sede_legale, String sede_operativa, String codice_fiscale, String iva, String email, String pec, String cellulare, String telefono, String ateco, String auditc, String auditt, String eventuali,int idarea){
 		this.id = id;
 		this.numero = numero;
 		this.nome = nome;
@@ -47,6 +48,7 @@ public class Azienda {
 		this.auditc = auditc;
 		this.auditt = auditt;
 		this.eventuali = eventuali;
+		this.idarea=idarea;
 		
 	}
 	
@@ -286,6 +288,13 @@ public class Azienda {
 		this.eventuali = eventuali;
 	}
 	
+	public void setIdArea(int idarea){
+		this.idarea = idarea;
+	}
+	
+	public int getIdArea(){
+		return idarea;
+	}
 	
 	
 	

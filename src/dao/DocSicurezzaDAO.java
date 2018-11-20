@@ -13,6 +13,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+import model.DocPrivacy;
 import model.DocSicurezza;
 import util.Database;
 
@@ -105,6 +106,46 @@ public static List<DocSicurezza> documentisicurezza(int id){
 		return s;
 	}
 
+
+
+
+
+public static List<DocPrivacy> documentiprivacy(int id){
+	
+	List<DocPrivacy> s=new ArrayList<DocPrivacy>();
+	
+	try {
+		Database.connect();
+		ResultSet g=Database.selectRecord("documentiprivacy,privacydoc","privacydoc.idazienda="+ id + " AND privacydoc.iddocpriv=documentiprivacy.id");
+		while(g.next()) {
+			int idd=g.getInt("privacydoc.id");
+			
+			String documento=g.getString("documento");
+			SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
+			 Date datas=g.getDate("privacydoc.data");
+			//if(g.getDate("data").equals(0)) {
+			//String datap="00/00/00";
+			 //DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+		      //datas = dateFormat.parse(datap);
+			//}else {
+		
+			int flag=g.getInt("flag");
+			DocPrivacy f=new DocPrivacy(idd,documento,flag,datas);
+			s.add(f);
+		}
+		Database.close();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return s;
+}
+
+
+
+
+
+
 public static void aggiornadocsic(String dat, int idd){
 	try {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -117,6 +158,26 @@ public static void aggiornadocsic(String dat, int idd){
 		System.out.println("cambio flaggggg"+ idd);
 		
 		Database.updateRecord("sicurezzadoc",agg,"sicurezzadoc.id="+idd);
+		Database.close();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
+
+public static void aggiornadocpriv(String dat, int idd){
+	try {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+	      Date datas = simpleDateFormat.parse(dat);
+		Map<String,Object> agg=new HashMap<String,Object>();
+		Database.connect();
+		agg.put("data",simpleDateFormat.format(datas));
+		agg.put("flag", 1);
+		System.out.println("cambio flaggggg"+ idd);
+		
+		Database.updateRecord("privacydoc",agg,"privacydoc.id="+idd);
 		Database.close();
 	} catch (Exception e) {
 		// TODO Auto-generated catch block

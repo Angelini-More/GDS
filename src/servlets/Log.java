@@ -79,7 +79,7 @@ public class Log extends HttpServlet {
 	        	
 	        	  
 	        	  
-	      		data.put("lista", AziendaDAO.lista());
+	      		//data.put("lista", AziendaDAO.lista());
 
 	      		
 	      		

@@ -108,12 +108,28 @@
     <servlet-name>ModificaNota</servlet-name>
     <url-pattern>/modifica_nota</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>DocSicurezza</servlet-name>
     <servlet-class>Servlets.DocSicurezza</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DocSicurezza</servlet-name>
     <url-pattern>/docsicurezza</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Privacy</servlet-name>
+    <servlet-class>Servlets.Privacy</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Privacy</servlet-name>
+    <url-pattern>/privacy</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DocPrivacy</servlet-name>
+    <servlet-class>Servlets.DocPrivacy</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DocPrivacy</servlet-name>
+    <url-pattern>/docprivacy</url-pattern>
   </servlet-mapping>
 </web-app>

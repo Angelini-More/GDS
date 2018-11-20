@@ -1,0 +1,75 @@
+<#include "headerhome.html">
+
+		<div class="row">
+		<div class="col-md-12">
+		
+			<center><h2>DOCUMENTO PRIVACY <#if nome ??>"${nome}"</#if></h2></center>
+		
+		  <div class="form-group">
+		  	<div class="col-sm-offset-2 col-sm-8">
+
+		  	<table id="mytable" class="table table-bordered table-striped">
+		  <thead>
+		    <tr>
+		     <th>Situazione</th>
+		     <th>Documento</th>
+		     <th>Data</th>
+		     <th>Azione</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  <#if documentis ??>
+		   <#list documentis as Documentis>
+		   <form class="form-horizontal" method="POST" action="DocPrivacy">
+		   <tr>
+		   <#if Documentis.flag==0><td>
+		   <center><img src="Template/img/non_fatto.png" class="icona"></center></td>
+		   </#if>
+		   <#if Documentis.flag==1>
+		      <td><center><img src="Template/img/fatto1.png" id="icona1"></center></td>
+		      </#if>
+		      <td>${Documentis.documento}</td>
+		     
+		    
+		      <td>
+		      
+		    
+
+		     
+		      <#if Documentis.getData()!="1-gen-0001"?date>
+		      ${Documentis.data}
+		      <#else>
+		      <input class="form-control" type="date" name="data" id="example-date-input">
+		      </#if>
+		      		
+		      		
+		      </td>
+			  <td>
+			   <#if Documentis.flag==0>	<button type="submit" class="btn btn-default" name="tasto" value="${Documentis.id}">FATTO
+			  		</button>
+			  		<input type="hidden" name="scelta" value="0">
+		   <#else>
+			  		<button type="submit" class="btn btn-default" name="tasto" value="${Documentis.id}">ANNULLA
+			  		
+			  	</button>
+			  	<input type="hidden" name="scelta" value="1">
+			  	</#if>
+			  </td>
+		   </tr>
+		   </form>
+		   </#list>
+		   </#if>
+		  </tbody>
+		</table>
+		</div>
+		</div>
+		
+		<div class="row spazio_fondo">
+		</div>
+	</div>
+</div>
+</div>
+
+
+
+<#include "footer.html">
