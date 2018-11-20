@@ -75,7 +75,7 @@ if(s!=null){
 		String ateco=request.getParameter("ateco");
 		String auditc=request.getParameter("auditc");
 		String auditt=request.getParameter("auditt");
-		String note=request.getParameter("note");
+		String eventuali=request.getParameter("eventuali");
 		
 		
 		
@@ -148,8 +148,8 @@ if(s!=null){
 			agg.put("auditt", auditt);
 		}
 		
-		if(note!=""){
-			agg.put("note", note);
+		if(eventuali!=""){
+			agg.put("eventuali", eventuali);
 		}
 		
 		try {

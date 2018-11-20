@@ -97,7 +97,7 @@ auditt=giornot+"/"+meset+"/"+annot;}
 		agg.put("ateco", request.getParameter("ateco"));
 		agg.put("auditc", auditc);
 		agg.put("auditt", auditt);
-		agg.put("note", request.getParameter("note"));
+		agg.put("eventuali", request.getParameter("eventuali"));
 		
 		try {
 			Database.connect();

@@ -129,9 +129,9 @@ public class AziendaDAO implements AziendaDAO_interface {
 			
 				String auditt=az.getString("auditt");
 			
-				String note=az.getString("note");
+				String eventuali=az.getString("eventuali");
 				
-				azi=new Azienda(id,numero,nome,comune,rappresentante,sedel,sedeo,codicef,iva,email,pec,cellulare,telefono,ateco,auditc,auditt,note);
+				azi=new Azienda(id,numero,nome,comune,rappresentante,sedel,sedeo,codicef,iva,email,pec,cellulare,telefono,ateco,auditc,auditt,eventuali);
 				
 			}
 			Database.close();

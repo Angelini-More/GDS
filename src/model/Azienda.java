@@ -19,7 +19,7 @@ public class Azienda {
 	private String ateco;
 	private String auditc;
 	private String auditt;
-	private String note;
+	private String eventuali;
 	private String nomecorsista;
 	private String nomecorso;
 	private String datascad;
@@ -29,7 +29,7 @@ public class Azienda {
 	private int idcorso;
 	
 	
-	public Azienda(int id,String numero, String nome, String comune, String rappresentante, String sede_legale, String sede_operativa, String codice_fiscale, String iva, String email, String pec, String cellulare, String telefono, String ateco, String auditc, String auditt, String note){
+	public Azienda(int id,String numero, String nome, String comune, String rappresentante, String sede_legale, String sede_operativa, String codice_fiscale, String iva, String email, String pec, String cellulare, String telefono, String ateco, String auditc, String auditt, String eventuali){
 		this.id = id;
 		this.numero = numero;
 		this.nome = nome;
@@ -46,7 +46,7 @@ public class Azienda {
 		this.ateco = ateco;
 		this.auditc = auditc;
 		this.auditt = auditt;
-		this.note = note;
+		this.eventuali = eventuali;
 		
 	}
 	
@@ -278,12 +278,12 @@ public class Azienda {
 		this.auditt = auditt;
 	}
 	
-	public String getNote(){
-		return note;
+	public String getEventuali(){
+		return eventuali;
 	}
 	
-	public void setNote(String note){
-		this.note = note;
+	public void setEventuali(String eventuali){
+		this.eventuali = eventuali;
 	}
 	
 	
