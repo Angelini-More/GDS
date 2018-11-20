@@ -2,7 +2,8 @@
 
 		<div class="row">
 		<div class="col-md-12">
-			<center><h2>DOCUMENTO SICUREZZA</h2></center>
+		
+			<center><h2>DOCUMENTO SICUREZZA <#if nome ??>"${nome}"</#if></h2></center>
 		
 		  <div class="form-group">
 		  	<div class="col-sm-offset-2 col-sm-8">
@@ -29,8 +30,11 @@
 		      </#if>
 		      <td>${Documentis.documento}</td>
 		     
+		     <#if Documentis.compar==1> 
+		      <td bgcolor="red">
+		      <#else>
 		      <td>
-		      
+		      </#if>
 		    
 
 		     

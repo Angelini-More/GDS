@@ -75,7 +75,13 @@ public class DocSicurezza extends HttpServlet {
 			
 				
 			}
+			ResultSet a=Database.selectRecord("azienda","id="+ida);
+			String nome="";
+			while(a.next()) {
+				 nome=a.getString("nome");
+			}
 		Database.close();
+		data.put("nome", nome);
 			data.put("documentis", DocSicurezzaDAO.documentisicurezza(ida));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

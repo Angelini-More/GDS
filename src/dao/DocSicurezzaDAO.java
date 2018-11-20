@@ -58,11 +58,18 @@ public static List<DocSicurezza> documentisicurezza(int id){
 			      //datas = dateFormat.parse(datap);
 				//}else {
 			int durata=g.getInt("documentisicurezza.durata");
+			int compar=0;
+			SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
 				 Date datas=g.getDate("sicurezzadoc.data");
+				 String u="0001-01-01";
+					
+					Date date3=formdata.parse(u);
+				 
+				if(durata!=0 && datas.compareTo(date3)!=0){
 				Calendar datan= Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
 				Calendar datao= Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
 				
-				SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
+				
 				
 				String r=formdata.format(datao.getTime());
 				System.out.println(r+" stringa data odierna");
@@ -77,17 +84,17 @@ public static List<DocSicurezza> documentisicurezza(int id){
 				String h=formdata.format(datan.getTime());
 				Date date2=formdata.parse(h);
 				System.out.println(formdata.format(datan.getTime())+" data aggiornata");
-				int compar=date1.compareTo(date2);
+				compar=date1.compareTo(date2);
 				System.out.println(compar+"comparazione date");
 				 /*if(datas.equals("NULL")) {}else {
 				 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				
 				 Date datar = simpleDateFormat.parse(datas);
 			
-				 datas=simpleDateFormat.format(datar);}*/
+				 datas=simpleDateFormat.format(datar);}*/}
 				System.out.println(datas+" data formattata");
 				int flag=g.getInt("flag");
-				DocSicurezza f=new DocSicurezza(idd,documento,datas,flag);
+				DocSicurezza f=new DocSicurezza(idd,documento,datas,flag,compar);
 				s.add(f);
 			}
 			Database.close();
