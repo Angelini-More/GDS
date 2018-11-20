@@ -94,6 +94,8 @@ public class Azienda {
 		
 	}
 	
+	
+	
 	public int getId(){
 		return id;
 	}

@@ -57,15 +57,15 @@ public class AziendaDAO implements AziendaDAO_interface {
 				String nome=listaaz1.getString("nome");
 				String comune=listaaz1.getString("comune");
 				String auditc=listaaz1.getString("auditc");
-				System.out.println(auditc + " dataaaaaaa");
-				String auditt=listaaz1.getString("auditt");
-
-				System.out.println(auditt + " dataaaaaaa");
-		
-				if(auditc!="") {
+				//System.out.println(auditc + " dataaaaaaa");
 				
 
-				Azienda z=new Azienda(id,numero, nome,comune,auditc,auditt);
+				
+		
+				if(!auditc.equals("")) {
+					System.out.println(auditc + " dataaaaaaa");
+
+				Azienda z=new Azienda(id,numero, nome,comune,auditc);
 				aziende1.add(z);
 			} }
 			Database.close();
@@ -94,7 +94,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 
 				System.out.println(auditt + " dataaaaaaa");
 		
-				if(auditt!="") {
+				if(!auditt.equals("")) {
 				
 
 				Azienda x=new Azienda(id,numero, nome,comune,auditc,auditt);
