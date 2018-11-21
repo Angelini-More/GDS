@@ -14,9 +14,9 @@ import java.util.Map;
 public class Database {
 	
 	protected static String DRIVER = "com.mysql.jdbc.Driver";
-	protected static String url = "jdbc:mysql://95.110.171.18/dbinstance_5229_1";
-	protected static String user = "5229_455";
-	protected static String psw = "germ6180";
+	protected static String url = "jdbc:mysql://localhost:3306/gestionale";
+	protected static String user = "root";
+	protected static String psw = "";
 
 
 	private static Connection db;
@@ -118,6 +118,13 @@ public class Database {
      * @return              dati prelevati
      * @throws java.sql.SQLException
      */
+    public static ResultSet selectRecordCond2(String table, String cond, String order) throws SQLException{
+        // Generazione query
+        String query = "SELECT * FROM " + table + " WHERE "+cond+" ORDER BY " + order;
+        // Esecuzione query
+        return Database.executeQuery(query);
+    }
+    
     public static ResultSet selectRecordCond(String table, String order) throws SQLException{
         // Generazione query
         String query = "SELECT * FROM " + table + " ORDER BY " + order;
