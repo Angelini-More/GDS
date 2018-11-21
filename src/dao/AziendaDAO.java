@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -109,6 +110,49 @@ public class AziendaDAO implements AziendaDAO_interface {
 		
 		return aziende2;
 	}
+	
+	
+	
+	
+	
+	public static List<Azienda> lista3(int idarea){
+		List<Azienda> aziende2=new ArrayList<Azienda>();
+		try {
+			Database.connect();
+			ResultSet listaaz2=Database.selectRecordCond2("azienda","azienda.idarea="+idarea, "azienda.nuovoauditt ASC");
+			while(listaaz2.next()){
+				int id=listaaz2.getInt("id");
+				String numero=listaaz2.getString("numero");
+				String nome=listaaz2.getString("nome");
+				String comune=listaaz2.getString("comune");
+				
+				
+				Date auditt=listaaz2.getDate("nuovoauditt");
+
+				System.out.println(auditt + " dataaaaaaa");
+				String u="0001-01-01";
+				SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
+				Date date3=formdata.parse(u);
+				if(auditt.compareTo(date3)==1 || auditt.compareTo(date3)==-1) {
+				
+
+				Azienda x=new Azienda(id,numero, nome,comune,auditt);
+				aziende2.add(x);
+			} }
+			Database.close();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return aziende2;
+	}
+	
+	
+	
+	
+	
 	
 	public static Azienda specifica(int id){
 		Azienda azi=null;

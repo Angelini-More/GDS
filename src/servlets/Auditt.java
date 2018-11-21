@@ -44,9 +44,16 @@ public class Auditt extends HttpServlet {
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
 		data.clear();
+		int idarea=(int) s.getAttribute("idarea");
+		if(idarea==1) {
 		data.put("lista2", AziendaDAO.lista2());
 		
-		FreeMarker.process("auditt.html", data, response, getServletContext());
+		FreeMarker.process("auditt.html", data, response, getServletContext());}
+		if(idarea==3) {
+			data.put("lista2", AziendaDAO.lista3(idarea));
+			
+			FreeMarker.process("auditt.html", data, response, getServletContext());
+		}
 		}else{
 			response.sendRedirect("Log");
 		}

@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Date;
 
 public class Azienda {
 
@@ -28,6 +29,7 @@ public class Azienda {
 	private int idcorsista;
 	private int idcorso;
 	private int idarea;
+	private Date nuovoauditt;
 	
 	
 	public Azienda(int id,String numero, String nome, String comune, String rappresentante, String sede_legale, String sede_operativa, String codice_fiscale, String iva, String email, String pec, String cellulare, String telefono, String ateco, String auditc, String auditt, String eventuali,int idarea){
@@ -82,6 +84,15 @@ public class Azienda {
 		this.comune = comune;
 		this.auditc = auditc;
 		this.auditt = auditt;
+	}
+	
+	
+	public Azienda(int id,String numero, String nome, String comune, Date nuovoauditt){
+		this.id = id;
+		this.numero = numero;
+		this.nome = nome;
+		this.comune = comune;
+	this.nuovoauditt=nuovoauditt;
 	}
 	
 	
@@ -297,6 +308,15 @@ public class Azienda {
 	public int getIdArea(){
 		return idarea;
 	}
+	
+	public void setNuovoAuditt(Date nuovoauditt){
+		this.nuovoauditt = nuovoauditt;
+	}
+	
+	public Date getNuovoAuditt(){
+		return nuovoauditt;
+	}
+	
 	
 	
 	

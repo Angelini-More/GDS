@@ -2,6 +2,9 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,12 +54,26 @@ public class Aggiungi extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
+			try {
+			
 		String scelta=request.getParameter("inserisci");
-		
+		String auditt="";
+		String auditc="";
 		if(scelta.equals("yes")){
 		Map<String,Object> agg=new HashMap<String,Object>();
-		String auditc=request.getParameter("auditc");
-		String auditt=request.getParameter("auditt");
+		
+		 auditc=request.getParameter("auditc");
+		 System.out.println(auditc + "visualizza data auditc");
+		 auditt=request.getParameter("auditt");
+		
+	
+		
+		
+			SimpleDateFormat caio = new SimpleDateFormat("dd-MM-yyyy");
+			Date dataauditc= caio.parse(auditc);
+			System.out.println(dataauditc+ " seeeeeeeeeeeee");
+		 Date dataauditt= caio.parse(auditt);
+		
 		if(auditc!=""){
 		String anno=auditc.substring(0,4);
 		System.out.println(anno + "annooooooo");
@@ -95,8 +112,15 @@ auditt=giornot+"/"+meset+"/"+annot;}
 		agg.put("cellulare", request.getParameter("cellulare"));
 		agg.put("telefono", request.getParameter("telefono"));
 		agg.put("ateco", request.getParameter("ateco"));
+		if((int) s.getAttribute("idarea")==1) {
 		agg.put("auditc", auditc);
 		agg.put("auditt", auditt);
+		}
+		if((int) s.getAttribute("idarea")==3 || (int) s.getAttribute("idarea")==4) {
+			agg.put("nuovoauditc", caio.format(dataauditc));
+			agg.put("nuovoauditt", caio.format(dataauditt));
+			}
+		
 		agg.put("idarea", s.getAttribute("idarea"));
 		agg.put("eventuali", request.getParameter("eventuali"));
 		
@@ -110,6 +134,11 @@ auditt=giornot+"/"+meset+"/"+annot;}
 		}
 		}
 		response.sendRedirect("Home");
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+			
 	}else{
 		response.sendRedirect("Log");
 	}

@@ -2,6 +2,9 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,7 +79,28 @@ if(s!=null){
 		String auditc=request.getParameter("auditc");
 		String auditt=request.getParameter("auditt");
 		String eventuali=request.getParameter("eventuali");
-		
+		SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
+		String h="0001-01-01";
+		Date dataauditt=null;
+		Date dataauditc=null;
+		try {
+			
+if(auditc=="") {
+	dataauditc=formdata.parse(h);
+}
+else {
+	 dataauditc=formdata.parse(auditc);
+}
+
+if(auditt=="") {
+	dataauditt=formdata.parse(h);
+} else {
+			 dataauditt=formdata.parse(auditt);}
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	 
 		
 		
 		Map<String,Object> agg=new HashMap<String,Object>();
@@ -132,6 +156,7 @@ if(s!=null){
 			agg.put("ateco", ateco);
 		}
 		
+		if((int) s.getAttribute("idarea")==1) {
 		if(auditc!=""){
 			String gg=auditc.substring(8,10);
 			String mm=auditc.substring(5,7);
@@ -146,6 +171,12 @@ if(s!=null){
 			String aa=auditt.substring(0,4);
 			auditt=gg + "/" +mm+ "/" +aa;
 			agg.put("auditt", auditt);
+		}}
+		
+		if((int) s.getAttribute("idarea")==3 || (int) s.getAttribute("idarea")==4) {
+			
+			agg.put("nuovoauditc", dataauditc);
+			agg.put("nuovoauditt", dataauditt);
 		}
 		
 		if(eventuali!=""){
