@@ -78,7 +78,8 @@
 			  		<td>${Lista.numero}</td>
 			  		<td><a href="Dettagli?id=${Lista.id}">${Lista.nome}</a></td>
 			  		<td>${Lista.comune}</td>
-			  		<td>${Lista.auditt}</td>
+			  		<td><#if Lista.getIdArea()==1>${Lista.auditt}</#if>
+			  		<#if Lista.getIdArea()==3>${Lista.getNuovoAuditt()}</#if></td>
 			  		<td>
 			  		<button type="button"  data-toggle="modal" data-target="#example1Modal-${Lista.id}">
 			  		<img src="Template/img/aggiorna.png" class="icona">

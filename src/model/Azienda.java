@@ -87,12 +87,26 @@ public class Azienda {
 	}
 	
 	
-	public Azienda(int id,String numero, String nome, String comune, Date nuovoauditt){
+	
+	
+	public Azienda(int id,String numero, String nome, String comune, String auditc, String auditt, int idarea){
+		this.id = id;
+		this.numero = numero;
+		this.nome = nome;
+		this.comune = comune;
+		this.auditc = auditc;
+		this.auditt = auditt;
+		this.idarea=idarea;
+	}
+	
+	
+	public Azienda(int id,String numero, String nome, String comune, Date nuovoauditt, int idarea){
 		this.id = id;
 		this.numero = numero;
 		this.nome = nome;
 		this.comune = comune;
 	this.nuovoauditt=nuovoauditt;
+	this.idarea=idarea;
 	}
 	
 	
@@ -102,6 +116,17 @@ public class Azienda {
 		this.nome = nome;
 		this.comune = comune;
 		this.auditc = auditc;
+		
+	}
+	
+	
+	public Azienda(int id,String numero, String nome, String comune, String auditc, int idarea){
+		this.id = id;
+		this.numero = numero;
+		this.nome = nome;
+		this.comune = comune;
+		this.auditc = auditc;
+		this.idarea=idarea;
 		
 	}
 	

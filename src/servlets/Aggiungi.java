@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -69,10 +70,18 @@ public class Aggiungi extends HttpServlet {
 	
 		
 		
-			SimpleDateFormat caio = new SimpleDateFormat("dd-MM-yyyy");
+			SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
 			Date dataauditc= caio.parse(auditc);
+			Calendar datat = Calendar.getInstance();
+			datat.setTime(dataauditc);
+			datat.add(Calendar.YEAR, 1);
+			dataauditc=datat.getTime();
 			System.out.println(dataauditc+ " seeeeeeeeeeeee");
 		 Date dataauditt= caio.parse(auditt);
+		 Calendar datar = Calendar.getInstance();
+			datar.setTime(dataauditt);
+			datar.add(Calendar.YEAR, 1);
+			dataauditc=datar.getTime();
 		
 		if(auditc!=""){
 		String anno=auditc.substring(0,4);
@@ -117,6 +126,8 @@ auditt=giornot+"/"+meset+"/"+annot;}
 		agg.put("auditt", auditt);
 		}
 		if((int) s.getAttribute("idarea")==3 || (int) s.getAttribute("idarea")==4) {
+			agg.put("auditc", "");
+			agg.put("auditt", "");
 			agg.put("nuovoauditc", caio.format(dataauditc));
 			agg.put("nuovoauditt", caio.format(dataauditt));
 			}

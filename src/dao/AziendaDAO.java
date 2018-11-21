@@ -47,26 +47,27 @@ public class AziendaDAO implements AziendaDAO_interface {
 		return aziende;
 	}
 	
-	public static List<Azienda> lista1(){
+	public static List<Azienda> lista1(int idarea){
 		List<Azienda> aziende1=new ArrayList<Azienda>();
 		try {
 			Database.connect();
-			ResultSet listaaz1=Database.selectRecordCond("azienda", "`azienda`.`auditc` ASC");
+			ResultSet listaaz1=Database.selectRecordCond2("azienda","azienda.idarea="+idarea, "`azienda`.`auditc` ASC");
 			while(listaaz1.next()){
+				
 				int id=listaaz1.getInt("id");
 				String numero=listaaz1.getString("numero");
 				String nome=listaaz1.getString("nome");
 				String comune=listaaz1.getString("comune");
 				String auditc=listaaz1.getString("auditc");
-				//System.out.println(auditc + " dataaaaaaa");
+				
 				
 
 				
 		
-				if(!auditc.equals("")) {
+				if(!(auditc.equals(""))) {
 					System.out.println(auditc + " dataaaaaaa");
 
-				Azienda z=new Azienda(id,numero, nome,comune,auditc);
+				Azienda z=new Azienda(id,numero, nome,comune,auditc,idarea);
 				aziende1.add(z);
 			} }
 			Database.close();
@@ -79,11 +80,11 @@ public class AziendaDAO implements AziendaDAO_interface {
 		return aziende1;
 	}
 	
-	public static List<Azienda> lista2(){
+	public static List<Azienda> lista2(int idarea){
 		List<Azienda> aziende2=new ArrayList<Azienda>();
 		try {
 			Database.connect();
-			ResultSet listaaz2=Database.selectRecordCond("azienda", "`azienda`.`auditt` ASC");
+			ResultSet listaaz2=Database.selectRecordCond2("azienda","azienda.idarea="+idarea, "`azienda`.`auditt` ASC");
 			while(listaaz2.next()){
 				int id=listaaz2.getInt("id");
 				String numero=listaaz2.getString("numero");
@@ -98,7 +99,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 				if(!auditt.equals("")) {
 				
 
-				Azienda x=new Azienda(id,numero, nome,comune,auditc,auditt);
+				Azienda x=new Azienda(id,numero, nome,comune,auditc,auditt,idarea);
 				aziende2.add(x);
 			} }
 			Database.close();
@@ -127,6 +128,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 				String comune=listaaz2.getString("comune");
 				
 				
+				
 				Date auditt=listaaz2.getDate("nuovoauditt");
 
 				System.out.println(auditt + " dataaaaaaa");
@@ -136,7 +138,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 				if(auditt.compareTo(date3)==1 || auditt.compareTo(date3)==-1) {
 				
 
-				Azienda x=new Azienda(id,numero, nome,comune,auditt);
+				Azienda x=new Azienda(id,numero, nome,comune,auditt,idarea);
 				aziende2.add(x);
 			} }
 			Database.close();
@@ -148,6 +150,46 @@ public class AziendaDAO implements AziendaDAO_interface {
 		
 		return aziende2;
 	}
+	
+	
+	
+	
+	
+	public static List<Azienda> lista4(int idarea){
+		List<Azienda> aziende2=new ArrayList<Azienda>();
+		try {
+			Database.connect();
+			ResultSet listaaz2=Database.selectRecordCond2("azienda","azienda.idarea="+idarea, "azienda.nuovoauditc ASC");
+			while(listaaz2.next()){
+				int id=listaaz2.getInt("id");
+				String numero=listaaz2.getString("numero");
+				String nome=listaaz2.getString("nome");
+				String comune=listaaz2.getString("comune");
+				
+				
+				
+				Date auditc=listaaz2.getDate("nuovoauditc");
+
+				
+				String u="0001-01-01";
+				SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
+				Date date3=formdata.parse(u);
+				if(auditc.compareTo(date3)==1 || auditc.compareTo(date3)==-1) {
+				
+
+				Azienda x=new Azienda(id,numero, nome,comune,auditc,idarea);
+				aziende2.add(x);
+			} }
+			Database.close();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return aziende2;
+	}
+	
 	
 	
 	

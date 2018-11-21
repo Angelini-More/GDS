@@ -46,7 +46,7 @@ public class Auditt extends HttpServlet {
 		data.clear();
 		int idarea=(int) s.getAttribute("idarea");
 		if(idarea==1) {
-		data.put("lista2", AziendaDAO.lista2());
+		data.put("lista2", AziendaDAO.lista2(idarea));
 		
 		FreeMarker.process("auditt.html", data, response, getServletContext());}
 		if(idarea==3) {

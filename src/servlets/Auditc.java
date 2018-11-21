@@ -44,8 +44,13 @@ public class Auditc extends HttpServlet {
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
 		data.clear();
-		data.put("lista1", AziendaDAO.lista1());
-		
+		int idarea=(int) s.getAttribute("idarea");
+		if(idarea==1) {
+		data.put("lista1", AziendaDAO.lista1(idarea));
+		}
+		if(idarea==3) {
+			data.put("lista1", AziendaDAO.lista4(idarea));
+		}
 		FreeMarker.process("auditc.html", data, response, getServletContext());
 		} else {
 			response.sendRedirect("Log");
