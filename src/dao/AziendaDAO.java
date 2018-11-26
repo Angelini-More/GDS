@@ -259,13 +259,25 @@ public class AziendaDAO implements AziendaDAO_interface {
 	}
 	
 	
-public static void azzeradata(int id,int serve){
+public static void azzeradata(int id,int serve, int area){
 		Map<String,Object> f=new HashMap<String,Object>();
 		try {
 			String a="";
-			if(serve==1){
+			String auditzero="0001-01-01";
+			SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
+			Date dataauditt= caio.parse(auditzero);
+			if(serve==1 && area==1){
 				f.put("auditt", a);	
-			} else {
+			} 
+			
+			if(serve==1 && area==3){
+				f.put("nuovoauditt", caio.format(dataauditt));	
+			} 
+			
+			if(serve!=1 && area==3){
+				f.put("nuovoauditc", caio.format(dataauditt));	
+			} 
+			if(serve!=1 && area==1) {
 				f.put("auditc", a);
 			}
 			

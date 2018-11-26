@@ -3,11 +3,17 @@ package servlets;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -68,57 +74,20 @@ public class Auditt extends HttpServlet {
 		if(s!=null){
 String premuto=request.getParameter("tasto");
 		
-		
+	int area=(int) s.getAttribute("idarea");	
 		
 		if(premuto.equals("si")){
 			int id=Integer.parseInt(request.getParameter("id"));
 			System.out.println(id + "idddddddddddd");
-			AziendaDAO.azzeradata(id,1);
-			
+			if(area==1) {
+			AziendaDAO.azzeradata(id,1,area);
+			}
+			if(area==3) {
+				AziendaDAO.azzeradata(id,1,area);
+			}
 			}
 		
-		if(premuto.equals("confermaaudc")){
-			int id=Integer.parseInt(request.getParameter("id"));
-			String datascadaudc="";
-			Map<String,Object> a=new HashMap<String,Object>();
-			try {
-				Database.connect();
-				ResultSet azienda=Database.selectRecord("azienda","id=" +id);
-				while(azienda.next()){
-					String dataauc=azienda.getString("auditc");
-					int anno=Integer.parseInt(dataauc.substring(6,10));
-					System.out.println(anno + "annooooooo");
-					int mese=Integer.parseInt(dataauc.substring(3,5));
-					System.out.println(mese + "meseeeeeee");
-					int giorno=Integer.parseInt(dataauc.substring(0,2));
-					System.out.println(giorno + "giornooooo");
-					anno=anno+1;
-					if(mese<10 && giorno>9){
-						datascadaudc=giorno+"/0"+mese+"/"+anno;
-						}
-						if(giorno<10 && mese>9){
-							datascadaudc="0"+giorno+"/"+mese+"/"+anno;
-							}
-						if(giorno<10 && mese<10){
-							datascadaudc="0"+giorno+"/0"+mese+"/"+anno;
-							}
-					a.put("auditc", datascadaudc);
-					Database.updateRecord("azienda",a,"id=" + id);
-					
-					
-				
-					/*LocalDate date = LocalDate.of(anno, mese, giorno);
-					a.put("auditc", date.plusYears(1));
-					Database.updateRecord("azienda",a,"id=" + id);*/
-				}
-				
-				Database.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
+
 		
 		
 		if(premuto.equals("confermaaudt")){
@@ -129,6 +98,7 @@ String premuto=request.getParameter("tasto");
 				Database.connect();
 				ResultSet azienda=Database.selectRecord("azienda","id=" +id);
 				while(azienda.next()){
+					if(area==1) {
 					String dataauc=azienda.getString("auditt");
 					int anno=Integer.parseInt(dataauc.substring(6,10));
 					System.out.println(anno + "annooooooo");
@@ -153,7 +123,18 @@ String premuto=request.getParameter("tasto");
 					Database.updateRecord("azienda",a,"id=" + id);
 				}
 				
+				if(area==3) {
+					SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
+					Date datac=azienda.getDate("nuovoauditt");
+					Calendar datan= Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
+					datan.setTime(datac);
+					datan.add(Calendar.YEAR, 1);
+					datac=datan.getTime();
+					a.put("nuovoauditt", caio.format(datac));
+					Database.updateRecord("azienda", a, "id=" + id);
+				}
 				Database.close();
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

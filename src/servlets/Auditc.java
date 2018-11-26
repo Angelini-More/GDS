@@ -3,11 +3,17 @@ package servlets;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -66,12 +72,12 @@ public class Auditc extends HttpServlet {
 		if(s!=null){
 String premuto=request.getParameter("tasto");
 		
-		
+	int area=(int) s.getAttribute("idarea");	
 		
 		if(premuto.equals("si")){
 			int id=Integer.parseInt(request.getParameter("id"));
 			System.out.println(id + "idddddddddddd");
-			AziendaDAO.azzeradata(id,0);
+			AziendaDAO.azzeradata(id,0,area);
 			
 			}
 		
@@ -83,6 +89,7 @@ String premuto=request.getParameter("tasto");
 				Database.connect();
 				ResultSet azienda=Database.selectRecord("azienda","id=" +id);
 				while(azienda.next()){
+					if(area==1) {
 					String dataauc=azienda.getString("auditc");
 					int anno=Integer.parseInt(dataauc.substring(6,10));
 					System.out.println(anno + "annooooooo");
@@ -107,7 +114,16 @@ String premuto=request.getParameter("tasto");
 					Database.updateRecord("azienda",a,"id=" + id);
 					
 					
-				
+					}if(area==3) {
+						SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
+						Date datac=azienda.getDate("nuovoauditc");
+						Calendar datan= Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
+						datan.setTime(datac);
+						datan.add(Calendar.YEAR, 1);
+						datac=datan.getTime();
+						a.put("nuovoauditc", caio.format(datac));
+						Database.updateRecord("azienda", a, "id=" + id);
+					}
 					/*LocalDate date = LocalDate.of(anno, mese, giorno);
 					a.put("auditc", date.plusYears(1));
 					Database.updateRecord("azienda",a,"id=" + id);*/
@@ -122,47 +138,7 @@ String premuto=request.getParameter("tasto");
 		}
 		
 		
-		if(premuto.equals("confermaaudt")){
-			int id=Integer.parseInt(request.getParameter("id"));
-			String datascadaudt="";
-			Map<String,Object> a=new HashMap<String,Object>();
-			try {
-				Database.connect();
-				ResultSet azienda=Database.selectRecord("azienda","id=" +id);
-				while(azienda.next()){
-					String dataauc=azienda.getString("auditt");
-					int anno=Integer.parseInt(dataauc.substring(0,4));
-					anno=anno+1;
-					int mese=Integer.parseInt(dataauc.substring(5,7));
-					System.out.println(mese + "meseeeeeee");
-					int giorno=Integer.parseInt(dataauc.substring(8,10));
-					System.out.println(giorno + "giornooooo");
-					if(mese<10 && giorno>9){
-					datascadaudt=anno+"-0"+mese+"-"+giorno;
-					}
-					if(giorno<10 && mese>9){
-						datascadaudt=anno+"-"+mese+"-0"+giorno;
-						}
-					if(giorno<10 && mese<10){
-						datascadaudt=anno+"-0"+mese+"-0"+giorno;
-						}
-					if(giorno>9 && mese>9){
-						datascadaudt=anno+"-"+mese+"-"+giorno;
-					}
-					
-					
-					a.put("auditt", datascadaudt);
-					Database.updateRecord("azienda",a,"id=" + id);
-				}
-				
-				Database.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-		}
+
 		
 		if(premuto.equals("cerca")){
 			String nomeaz=request.getParameter("nomeaz");
