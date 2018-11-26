@@ -63,98 +63,8 @@ public class NuovoAuditt extends HttpServlet {
 String premuto=request.getParameter("tasto");
 		
 		
-		
-		if(premuto.equals("si")){
-			int id=Integer.parseInt(request.getParameter("id"));
-			System.out.println(id + "idddddddddddd");
-			AziendaDAO.azzeradata(id,1);
-			
-			}
-		
-		if(premuto.equals("confermaaudc")){
-			int id=Integer.parseInt(request.getParameter("id"));
-			String datascadaudc="";
-			Map<String,Object> a=new HashMap<String,Object>();
-			try {
-				Database.connect();
-				ResultSet azienda=Database.selectRecord("azienda","id=" +id);
-				while(azienda.next()){
-					String dataauc=azienda.getString("auditc");
-					int anno=Integer.parseInt(dataauc.substring(6,10));
-					System.out.println(anno + "annooooooo");
-					int mese=Integer.parseInt(dataauc.substring(3,5));
-					System.out.println(mese + "meseeeeeee");
-					int giorno=Integer.parseInt(dataauc.substring(0,2));
-					System.out.println(giorno + "giornooooo");
-					anno=anno+1;
-					if(mese<10 && giorno>9){
-						datascadaudc=giorno+"/0"+mese+"/"+anno;
-						}
-						if(giorno<10 && mese>9){
-							datascadaudc="0"+giorno+"/"+mese+"/"+anno;
-							}
-						if(giorno<10 && mese<10){
-							datascadaudc="0"+giorno+"/0"+mese+"/"+anno;
-							}
-					a.put("auditc", datascadaudc);
-					Database.updateRecord("azienda",a,"id=" + id);
-					
-					
-				
-					/*LocalDate date = LocalDate.of(anno, mese, giorno);
-					a.put("auditc", date.plusYears(1));
-					Database.updateRecord("azienda",a,"id=" + id);*/
-				}
-				
-				Database.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		
-		
-		if(premuto.equals("confermaaudt")){
-			int id=Integer.parseInt(request.getParameter("id"));
-			String datascadaudt="";
-			Map<String,Object> a=new HashMap<String,Object>();
-			try {
-				Database.connect();
-				ResultSet azienda=Database.selectRecord("azienda","id=" +id);
-				while(azienda.next()){
-					String dataauc=azienda.getString("auditt");
-					int anno=Integer.parseInt(dataauc.substring(6,10));
-					System.out.println(anno + "annooooooo");
-					int mese=Integer.parseInt(dataauc.substring(3,5));
-					System.out.println(mese + "meseeeeeee");
-					int giorno=Integer.parseInt(dataauc.substring(0,2));
-					System.out.println(giorno + "giornooooo");
-					anno=anno+1;
-					if(mese<10 && giorno>9){
-						datascadaudt=giorno+"/0"+mese+"/"+anno;
-						}
-						if(giorno<10 && mese>9){
-							datascadaudt="0"+giorno+"/"+mese+"/"+anno;
-							}
-						if(giorno<10 && mese<10){
-							datascadaudt="0"+giorno+"/0"+mese+"/"+anno;
-							}
-						if(giorno>9 && mese>9){
-							datascadaudt=giorno+"/"+mese+"/"+anno;
-						}
-					a.put("auditt", datascadaudt);
-					Database.updateRecord("azienda",a,"id=" + id);
-				}
-				
-				Database.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-		}
+		int area=(int) s.getAttribute("idarea");
+
 		
 		if(premuto.equals("cerca")){
 			String nomeaz=request.getParameter("nomeaz");
@@ -163,7 +73,7 @@ String premuto=request.getParameter("tasto");
 			System.out.println(mese+"fasaf");
 			if(nomeaz!=""){
 				try {
-					data.put("lista2", AziendaDAO.cercaaz(nomeaz));
+					data.put("lista2", AziendaDAO.cercaaz(nomeaz,area));
 					data.put("titolo", 1);
 					data.put("mess", nomeaz);
 					FreeMarker.process("auditt.html", data, response, getServletContext());

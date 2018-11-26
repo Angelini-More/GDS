@@ -43,6 +43,7 @@ public class Area extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession s = SecurityLayer.checkSession(request);
+		if(s!=null) {
 		int areascelta = Integer.parseInt(request.getParameter("areascelta"));
 		s.setAttribute("idarea", areascelta);
 		if(areascelta==1) {
@@ -57,6 +58,8 @@ public class Area extends HttpServlet {
 		if(areascelta==4) {
 		FreeMarker.process("antincendio.html", data, response, getServletContext());
 		}
+	}else {
+		response.sendRedirect("Log");
 	}
-
+	} 
 }

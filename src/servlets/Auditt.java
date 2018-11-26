@@ -150,7 +150,7 @@ String premuto=request.getParameter("tasto");
 			System.out.println(mese+"fasaf");
 			if(nomeaz!=""){
 				try {
-					data.put("lista2", AziendaDAO.cercaaz(nomeaz));
+					data.put("lista2", AziendaDAO.cercaaz(nomeaz,area));
 					data.put("titolo", 1);
 					data.put("mess", nomeaz);
 					FreeMarker.process("auditt.html", data, response, getServletContext());

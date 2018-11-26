@@ -175,8 +175,8 @@ if(auditt=="") {
 		
 		if((int) s.getAttribute("idarea")==3 || (int) s.getAttribute("idarea")==4) {
 			
-			agg.put("nuovoauditc", dataauditc);
-			agg.put("nuovoauditt", dataauditt);
+			agg.put("nuovoauditc", formdata.format(dataauditc));
+			agg.put("nuovoauditt", formdata.format(dataauditt));
 		}
 		
 		if(eventuali!=""){

@@ -63,12 +63,12 @@ public class Home extends HttpServlet {
 		if(s!=null){
 		String premuto=request.getParameter("tasto");
 		
-		
+		int area=(int) s.getAttribute("idarea");
 		
 		if(premuto.equals("si")){
 			int id=Integer.parseInt(request.getParameter("id"));
 			System.out.println(id + "idddddddddddd");
-			AziendaDAO.cancella(id);
+			AziendaDAO.cancella(id, area);
 			doGet(request, response);
 			}
 		
@@ -78,7 +78,7 @@ public class Home extends HttpServlet {
 		String cercacom=request.getParameter("comune");
 		
 			try {
-				data.put("lista", AziendaDAO.cerca(cercaaz, cercacom));
+				data.put("lista", AziendaDAO.cerca(cercaaz, cercacom, area));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

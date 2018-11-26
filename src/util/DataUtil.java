@@ -191,7 +191,7 @@ public class DataUtil {
         return string_crypted.equals(crypt(to_check));
     }
     
-    public static List<Azienda> search(String inputa, String inputc) throws Exception {
+    public static List<Azienda> search(String inputa, String inputc, int area) throws Exception {
 
         List<Azienda> result = new ArrayList<Azienda>();
 
@@ -199,7 +199,8 @@ public class DataUtil {
         //System.out.println(input);
 
         try {
-            String condition = " nome LIKE '%" + inputa + "%' OR comune LIKE '%" + inputc + "%'";
+            String condition = " (nome LIKE '%" + inputa + "%' OR comune LIKE '%" + inputc + "%') AND idarea= " + area;
+            System.out.println(condition + "condizioneeeeeeee");
             //System.out.println(condition);
 
             ResultSet record = Database.selectRecord("azienda", condition);
@@ -227,7 +228,7 @@ public class DataUtil {
     
     
     
-    public static List<Azienda> searchaz(String input) throws Exception {
+    public static List<Azienda> searchaz(String input, int area) throws Exception {
 
         List<Azienda> result = new ArrayList<Azienda>();
 
@@ -235,7 +236,7 @@ public class DataUtil {
         //System.out.println(input);
 
         try {
-            String condition = " nome LIKE '%" + input + "%'";
+            String condition = " nome LIKE '%" + input + "%' AND idarea=" + area;
             //System.out.println(condition);
 
             ResultSet record = Database.selectRecord("azienda", condition);
@@ -263,7 +264,7 @@ public class DataUtil {
     }
     
     
-    public static List<Azienda> searchcom(String input) throws Exception {
+    public static List<Azienda> searchcom(String input, int area) throws Exception {
 
         List<Azienda> result = new ArrayList<Azienda>();
 
@@ -271,7 +272,7 @@ public class DataUtil {
         //System.out.println(input);
 
         try {
-            String condition = " comune LIKE '%" + input + "%'";
+            String condition = " comune LIKE '%" + input + "%' AND idarea=" + area;
             //System.out.println(condition);
 
             ResultSet record = Database.selectRecord("azienda", condition);

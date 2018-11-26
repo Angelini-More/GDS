@@ -236,17 +236,26 @@ public class AziendaDAO implements AziendaDAO_interface {
 		return azi;
 	}
 	
-	public static void cancella(int id){
+	public static void cancella(int id, int area){
 		
 		try {
 			Database.connect();
+			if(area==1) {
 			ResultSet i=Database.selectRecord("corsista","corsista.idazienda=" + id);
 			while(i.next()){
 				int idc=i.getInt("id");
 				Database.deleteRecord("acc", "acc.id_corsista=" +idc);
 			}
 			Database.deleteRecord("corsista", "corsista.idazienda=" + id);
+			Database.deleteRecord("sicurezzadoc","sicurezzadoc.idazienda="+id);
+			Database.deleteRecord("note","note.idazienda="+id);
 			Database.deleteRecord("azienda", "id = " + id);
+			}
+			if(area==3) {
+				Database.deleteRecord("privacydoc","privacydoc.idazienda="+id);
+				Database.deleteRecord("note","note.idazienda="+id);
+				Database.deleteRecord("azienda", "id = " + id);
+			}
 			Database.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -294,23 +303,23 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 		
 	}
 	
-	public static List<Azienda> cerca(String cercaaz, String cercacom) throws Exception{
+	public static List<Azienda> cerca(String cercaaz, String cercacom, int area) throws Exception{
 		
 		List<Azienda> cercate=new ArrayList<Azienda>();
 		
 				
 			
 				if(cercaaz!="" && cercacom==""){
-				return DataUtil.searchaz(cercaaz);
+				return DataUtil.searchaz(cercaaz,area);
 				}
 				
 				if(cercacom!="" && cercaaz==""){
-					return DataUtil.searchcom(cercacom);
+					return DataUtil.searchcom(cercacom,area);
 				}
 				
 				
 				if(cercacom!="" && cercaaz!=""){
-					return DataUtil.search(cercaaz,cercacom);
+					return DataUtil.search(cercaaz,cercacom,area);
 				}
 				
 				
@@ -325,11 +334,11 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 	
 	
 	
-	public static List<Azienda> cercaaz(String cercaaz) throws Exception{
+	public static List<Azienda> cercaaz(String cercaaz, int area) throws Exception{
 		
 		
 		
-				return DataUtil.searchaz(cercaaz);
+				return DataUtil.searchaz(cercaaz,area);
 				
 				
 			}
