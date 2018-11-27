@@ -21,6 +21,8 @@ public class Azienda {
 	private String auditc;
 	private String auditt;
 	private String eventuali;
+	private String cpi;
+	private String riferimento;
 	private String nomecorsista;
 	private String nomecorso;
 	private String datascad;
@@ -50,6 +52,30 @@ public class Azienda {
 		this.auditc = auditc;
 		this.auditt = auditt;
 		this.eventuali = eventuali;
+		this.idarea=idarea;
+		
+	}
+	
+	public Azienda(int id,String numero, String nome, String comune, String rappresentante, String sede_legale, String sede_operativa, String codice_fiscale, String iva, String email, String pec, String cellulare, String telefono, String ateco, String auditc, String auditt, String eventuali,String cpi, String riferimento, int idarea){
+		this.id = id;
+		this.numero = numero;
+		this.nome = nome;
+		this.comune = comune;
+		this.rappresentante = rappresentante;
+		this.sede_legale = sede_legale;
+		this.sede_operativa = sede_operativa;
+		this.codice_fiscale = codice_fiscale;
+		this.iva = iva;
+		this.email = email;
+		this.pec = pec;
+		this.cellulare = cellulare;
+		this.telefono = telefono;
+		this.ateco = ateco;
+		this.auditc = auditc;
+		this.auditt = auditt;
+		this.eventuali = eventuali;
+		this.cpi=cpi;
+		this.riferimento=riferimento;
 		this.idarea=idarea;
 		
 	}
@@ -324,6 +350,22 @@ public class Azienda {
 	
 	public void setEventuali(String eventuali){
 		this.eventuali = eventuali;
+	}
+	
+	public String getCpi(){
+		return cpi;
+	}
+	
+	public void setCpi(String cpi){
+		this.cpi = cpi;
+	}
+	
+	public String getRiferimento(){
+		return eventuali;
+	}
+	
+	public void setRiferimento(String riferimento){
+		this.riferimento = riferimento;
 	}
 	
 	public void setIdArea(int idarea){
