@@ -1,4 +1,21 @@
-<#include "headerhome.html"> 
+<#if ciao ??>
+
+
+	<#if ciao==1>
+		<#include "headerhome.html">
+	
+	<#elseif ciao==2>
+		<#include "headerhaccp.html">
+
+	<#elseif ciao==3>
+		<#include "headerprivacy.html">
+	
+	<#else>
+		<#include "headerantincendio.html">
+	</#if>
+
+
+</#if> 
 	
 		<div class="row clienti">
 		<div class="col-md-12">

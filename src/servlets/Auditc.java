@@ -50,6 +50,7 @@ public class Auditc extends HttpServlet {
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
 		data.clear();
+		data.put("ciao", s.getAttribute("idarea"));
 		int idarea=(int) s.getAttribute("idarea");
 		if(idarea==1) {
 		data.put("lista1", AziendaDAO.lista1(idarea));

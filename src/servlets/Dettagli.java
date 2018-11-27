@@ -37,6 +37,7 @@ public class Dettagli extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
+			data.put("ciao", s.getAttribute("idarea"));
 		int id=Integer.parseInt(request.getParameter("id"));
 		s.setAttribute("id", id);
 		data.put("azienda", AziendaDAO.specifica(id));

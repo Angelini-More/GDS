@@ -51,6 +51,7 @@ public class Auditt extends HttpServlet {
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
 		data.clear();
+		data.put("ciao", s.getAttribute("idarea"));
 		int idarea=(int) s.getAttribute("idarea");
 		if(idarea==1) {
 		data.put("lista2", AziendaDAO.lista2(idarea));

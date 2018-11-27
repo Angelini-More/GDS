@@ -43,6 +43,7 @@ public class Scadenzario extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
+			data.put("ciao", s.getAttribute("idarea"));
 		int scaduto=0;
 		List<Azienda> g=new ArrayList<Azienda>();
 		List<Corso> as=new ArrayList<Corso>();
