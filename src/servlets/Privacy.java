@@ -55,32 +55,7 @@ public class Privacy extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
-		String premuto=request.getParameter("tasto");
-		
-		
-		
-		if(premuto.equals("si")){
-			int id=Integer.parseInt(request.getParameter("id"));
-			System.out.println(id + "idddddddddddd");
-			AziendaDAO.cancella(id);
-			doGet(request, response);
-			}
-		
-		if(premuto.equals("cerca")){
-		
-		String cercaaz=request.getParameter("nomeaz");
-		String cercacom=request.getParameter("comune");
-		
-			try {
-				data.put("lista", AziendaDAO.cerca(cercaaz, cercacom));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			data.put("titolo", 1);
-			 FreeMarker.process("home.html", data, response, getServletContext());
-			
-			}
+
 		
 		
 		

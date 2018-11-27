@@ -371,9 +371,10 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 		
 	}
 	
-	public static List<Azienda> cercam1(String mese,String anno) throws Exception{
+	public static List<Azienda> cercam1(String mese,String anno,int area) throws Exception{
 		List<Azienda> lis=new ArrayList<Azienda>();
 		Database.connect();
+		if(area==1) {
 		ResultSet listaz=Database.selectRecord("azienda");
 		while(listaz.next()){
 			String auditt=listaz.getString("auditt");
@@ -392,6 +393,19 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
                 Azienda n=new Azienda(id,numero,nome,comune,auditc,auditt);
               lis.add(n);
 			}
+			}
+		}
+		}
+		if(area==3) {
+			ResultSet listaz=Database.selectDate("azienda","MONTH(nuovoauditt)=" + mese +" AND YEAR(nuovoauditt)=" + anno,"nuovoauditt ASC");
+			while(listaz.next()) {
+				int id=listaz.getInt("id");
+				  String nome = listaz.getString("nome");
+	                String comune = listaz.getString("comune");
+	                String numero = listaz.getString("numero");
+	                Date nuovoauditt=listaz.getDate("nuovoauditt");
+	                Azienda n=new Azienda(id,numero,nome,comune,nuovoauditt,area);
+	                lis.add(n);
 			}
 		}
 		Database.close();

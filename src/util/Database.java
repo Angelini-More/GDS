@@ -104,6 +104,14 @@ public class Database {
     }
     
     
+    public static ResultSet selectDate(String table, String condition, String order) throws SQLException{
+        // Generazione query
+        String query = "SELECT * FROM " + table + " WHERE " + condition + " ORDER BY " + order;
+        // Esecuzione query
+        return Database.executeQuery(query);
+    }
+    
+    
     public static ResultSet selectRecordOrdinato() throws SQLException{
         // Generazione query
         String query = "SELECT auditt, CONVERT(SUBSTRING_INDEX(auditt,'/',),UNSIGNED INTEGER) AS numero FROM azienda ORDER BY numero";

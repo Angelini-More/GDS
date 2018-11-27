@@ -32,7 +32,7 @@ public class Azienda {
 	private int idcorso;
 	private int idarea;
 	private Date nuovoauditt;
-	
+	private Date nuovoauditc;
 	
 	public Azienda(int id,String numero, String nome, String comune, String rappresentante, String sede_legale, String sede_operativa, String codice_fiscale, String iva, String email, String pec, String cellulare, String telefono, String ateco, String auditc, String auditt, String eventuali,int idarea){
 		this.id = id;
@@ -111,6 +111,21 @@ public class Azienda {
 		this.auditc = auditc;
 		this.auditt = auditt;
 	}
+	
+	
+	public Azienda(int id,String numero, String nome, String comune, Date auditc, Date auditt, int idarea){
+		this.id = id;
+		this.numero = numero;
+		this.nome = nome;
+		this.comune = comune;
+		this.nuovoauditc = auditc;
+		this.nuovoauditt = auditt;
+		this.idarea=idarea;
+	}
+	
+	
+
+	
 	
 	
 	
@@ -382,6 +397,14 @@ public class Azienda {
 	
 	public Date getNuovoAuditt(){
 		return nuovoauditt;
+	}
+	
+	public void setNuovoAuditc(Date nuovoauditc){
+		this.nuovoauditc = nuovoauditc;
+	}
+	
+	public Date getNuovoAuditc(){
+		return nuovoauditc;
 	}
 	
 	
