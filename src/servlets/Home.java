@@ -45,6 +45,7 @@ public class Home extends HttpServlet {
 		if(s!=null){
 		data.clear();
 		data.put("lista", AziendaDAO.lista((int) s.getAttribute("idarea")));
+		data.put("ciao", s.getAttribute("idarea"));
 
   		
   		
