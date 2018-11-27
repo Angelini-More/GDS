@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -163,12 +166,19 @@ if(s!=null){
 		}}
 		
 		if((int) s.getAttribute("idarea")==3 || (int) s.getAttribute("idarea")==4) {
-			if(auditc=="") {
+			if(auditc!="") {
 				
 
 
 				 try {
-					dataauditc=formdata.parse(auditc);
+					 SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
+					 dataauditc=formdata.parse(auditc);
+						Calendar datan= Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
+						datan.setTime(dataauditc);
+						datan.add(Calendar.YEAR, 1);
+						dataauditc=datan.getTime();
+						
+					
 					agg.put("nuovoauditc", formdata.format(dataauditc));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
@@ -176,9 +186,14 @@ if(s!=null){
 				}
 			}
 			
-			if(auditt=="") {
+			if(auditt!="") {
 				 try {
-					dataauditt=formdata.parse(auditt);
+					 SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
+					 dataauditt=formdata.parse(auditt);
+						Calendar datac= Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
+						datac.setTime(dataauditt);
+						datac.add(Calendar.YEAR, 1);
+						dataauditt=datac.getTime();
 					agg.put("nuovoauditt", formdata.format(dataauditt));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
