@@ -48,6 +48,7 @@ public class Formazione extends HttpServlet {
 		if(s!=null){
 		int ida=(int) s.getAttribute("id");
 		System.out.println(ida + "id azienda");
+		data.put("ciao", s.getAttribute("idarea"));
 		
 			try {
 				data.put("nomeaz", AziendaDAO.specifica(ida));

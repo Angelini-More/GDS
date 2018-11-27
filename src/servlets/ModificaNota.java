@@ -46,6 +46,7 @@ public class ModificaNota extends HttpServlet {
 		String testo="";
 		List<Note> listan=new ArrayList<Note>();
 		if(s!=null){
+			data.put("ciao", s.getAttribute("idarea"));
 				
 				int idnota=Integer.parseInt(request.getParameter("idnota"));
 			try {

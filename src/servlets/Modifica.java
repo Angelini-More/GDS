@@ -43,6 +43,7 @@ public class Modifica extends HttpServlet {
 		int id=0;
 HttpSession s = SecurityLayer.checkSession(request);
 if(s!=null){
+	data.put("ciao", s.getAttribute("idarea"));
 		
 		id=Integer.parseInt(request.getParameter("id"));
 		data.put("azienda", AziendaDAO.specifica(id));

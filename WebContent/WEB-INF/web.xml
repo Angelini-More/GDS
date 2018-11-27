@@ -132,4 +132,20 @@
     <servlet-name>DocPrivacy</servlet-name>
     <url-pattern>/docprivacy</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>Haccp</servlet-name>
+    <servlet-class>Servlets.Haccp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Haccp</servlet-name>
+    <url-pattern>/haccp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Antincendio</servlet-name>
+    <servlet-class>Servlets.Antincendio</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Antincendio</servlet-name>
+    <url-pattern>/antincendio</url-pattern>
+  </servlet-mapping>
 </web-app>

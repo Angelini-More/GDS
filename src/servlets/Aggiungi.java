@@ -42,6 +42,7 @@ public class Aggiungi extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
+		data.put("ciao", s.getAttribute("idarea"));
 		FreeMarker.process("aggiungi_cliente.html", data, response, getServletContext());
 		} else {
 			response.sendRedirect("Log");

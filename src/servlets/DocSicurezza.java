@@ -48,6 +48,7 @@ public class DocSicurezza extends HttpServlet {
 		int cont=0;
 		Map<String,Object> agg=new HashMap<String,Object>();
 		if(s!=null){
+			data.put("ciao", s.getAttribute("idarea"));
 			
 		int ida=(int) s.getAttribute("id");
 		ResultSet r;
