@@ -54,6 +54,9 @@ public class Aggiungi extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession s = SecurityLayer.checkSession(request);
+		SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataauditc=null;
+		Date dataauditt=null;
 		if(s!=null){
 			try {
 			
@@ -69,20 +72,36 @@ public class Aggiungi extends HttpServlet {
 		
 	
 		
+		if((int) s.getAttribute("idarea")==3) {
 		
-			SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
-			Date dataauditc= caio.parse(auditc);
+			if(!auditc.equals("")) {
+			dataauditc= caio.parse(auditc);
 			Calendar datat = Calendar.getInstance();
 			datat.setTime(dataauditc);
 			datat.add(Calendar.YEAR, 1);
 			dataauditc=datat.getTime();
 			System.out.println(dataauditc+ " seeeeeeeeeeeee");
-		 Date dataauditt= caio.parse(auditt);
+			} else
+			{
+				String f="0001-01-01";
+				dataauditc= caio.parse(f);
+			}
+			if(!auditt.equals("")) {
+		  dataauditt= caio.parse(auditt);
 		 Calendar datar = Calendar.getInstance();
 			datar.setTime(dataauditt);
 			datar.add(Calendar.YEAR, 1);
-			dataauditc=datar.getTime();
+			dataauditt=datar.getTime();
+			}
+			else
+			{
+				String f="0001-01-01";
+				 dataauditt= caio.parse(f);
+			}
+			
+		}
 		
+		if((int) s.getAttribute("idarea")==1) {
 		if(auditc!=""){
 		String anno=auditc.substring(0,4);
 		System.out.println(anno + "annooooooo");
@@ -100,6 +119,7 @@ public class Aggiungi extends HttpServlet {
 	String giornot=auditt.substring(8,10);
 	System.out.println(giornot + "giornooooo");
 auditt=giornot+"/"+meset+"/"+annot;}
+		}
 		/*if(auditc.equals(""))
 		{
 			auditc=null;

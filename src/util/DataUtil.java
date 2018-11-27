@@ -230,7 +230,7 @@ public class DataUtil {
     
     
     
-    public static List<Azienda> searchaz(String input, int area) throws Exception {
+    public static List<Azienda> searchaz(String input, int area, int t) throws Exception {
 
         List<Azienda> result = new ArrayList<Azienda>();
 
@@ -251,9 +251,16 @@ public class DataUtil {
                 String numero = record.getString("numero");
                 int id = record.getInt("id");
                
-
-                Azienda k = new Azienda(id,numero,nome,comune,auditc,auditt);
-                result.add(k);
+if(t==1 && !auditc.equals("")) {
+	 Azienda k = new Azienda(id,numero,nome,comune,auditc,area);
+	 result.add(k);
+}
+if(t==2 && !auditt.equals("")) {
+	 Azienda k = new Azienda(id,numero,nome,comune,auditt,area);
+	 result.add(k);
+}
+               
+                
             }
             Database.close();
         } catch (SQLException ex) {

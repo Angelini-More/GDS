@@ -83,23 +83,11 @@ if(s!=null){
 		String h="0001-01-01";
 		Date dataauditt=null;
 		Date dataauditc=null;
-		try {
+	
 			
-if(auditc=="") {
-	dataauditc=formdata.parse(h);
-}
-else {
-	 dataauditc=formdata.parse(auditc);
-}
 
-if(auditt=="") {
-	dataauditt=formdata.parse(h);
-} else {
-			 dataauditt=formdata.parse(auditt);}
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
+
 	 
 		
 		
@@ -174,9 +162,30 @@ if(auditt=="") {
 		}}
 		
 		if((int) s.getAttribute("idarea")==3 || (int) s.getAttribute("idarea")==4) {
+			if(auditc=="") {
+				
+
+
+				 try {
+					dataauditc=formdata.parse(auditc);
+					agg.put("nuovoauditc", formdata.format(dataauditc));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			
-			agg.put("nuovoauditc", formdata.format(dataauditc));
-			agg.put("nuovoauditt", formdata.format(dataauditt));
+			if(auditt=="") {
+				 try {
+					dataauditt=formdata.parse(auditt);
+					agg.put("nuovoauditt", formdata.format(dataauditt));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 }
+					
+			
 		}
 		
 		if(eventuali!=""){
@@ -185,7 +194,7 @@ if(auditt=="") {
 		
 		try {
 			Database.connect();
-			Database.updateRecord("azienda", agg, "id = " + id);
+			Database.updateRecord("azienda", agg, "azienda.id=" + id);
 			Database.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

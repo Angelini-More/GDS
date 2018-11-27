@@ -152,7 +152,7 @@ String premuto=request.getParameter("tasto");
 			if(nomeaz!=""){
 				try {
 					if(area==1) {
-					data.put("lista2", AziendaDAO.cercaaz(nomeaz,area));
+					data.put("lista2", AziendaDAO.cercaaz(nomeaz,area,2));
 					}
 					if(area==3) {
 						data.put("lista2", DataUtil.searchazpr(nomeaz,area));

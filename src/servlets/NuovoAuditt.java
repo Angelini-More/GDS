@@ -66,35 +66,7 @@ String premuto=request.getParameter("tasto");
 		int area=(int) s.getAttribute("idarea");
 
 		
-		if(premuto.equals("cerca")){
-			String nomeaz=request.getParameter("nomeaz");
-			String mese=request.getParameter("mese");
-			String anno=request.getParameter("anno");
-			System.out.println(mese+"fasaf");
-			if(nomeaz!=""){
-				try {
-					data.put("lista2", AziendaDAO.cercaaz(nomeaz,area));
-					data.put("titolo", 1);
-					data.put("mess", nomeaz);
-					FreeMarker.process("auditt.html", data, response, getServletContext());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			if(mese!="00" && anno!=""){
-				try {
-					data.put("lista2", AziendaDAO.cercam1(mese,anno));
-					data.put("titolo", 1);
-					data.put("mess", mese);
-					FreeMarker.process("auditt.html", data, response, getServletContext());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
+
 		doGet(request, response);
 	}else{
 		response.sendRedirect("Log");

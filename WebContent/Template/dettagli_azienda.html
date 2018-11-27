@@ -67,11 +67,20 @@
 				  </tr>
 				  <tr>
 			           <td class="testo"><i class="glyphicon glyphicon-calendar"></i> Scadenza Audit Commerciale</td>
-		               <td>${azienda.auditc}</td>
+		              <#if azienda.getIdArea()==1> <td>${azienda.auditc}</td></#if>
+		              <#if azienda.getIdArea()==3  &&  azienda.getNuovoAuditc()!="1-gen-0001"?date> <td>${azienda.getNuovoAuditc()}</td>
+		              <#else>
+		                <td></td>
+		                </#if>
 				  </tr>
 				  <tr>
 			           <td class="testo"><i class="glyphicon glyphicon-calendar"></i> Scadenza Audit Tecnico</td>
-		               <td>${azienda.auditt}</td>
+		               <#if azienda.getIdArea()==1> <td>${azienda.auditt}</td></#if>
+		              <#if azienda.getIdArea()==3 &&  azienda.getNuovoAuditt()!="1-gen-0001"?date>
+		               <td>${azienda.getNuovoAuditt()}</td>
+		               <#else>
+		                <td></td>
+		                </#if>
 				  </tr>
 				  <tr>
 					   <td class="testo"><i class="glyphicon glyphicon-tag"></i> Eventuali</td>

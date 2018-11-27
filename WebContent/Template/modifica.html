@@ -62,11 +62,19 @@
 		    <input type="text" class="form-control" id="inputAddress" name="ateco">
 		  </div>
 		  <div class="form-group">
-			<label for="exampleFormControlInput1">Audit Commerciale: ${azienda.auditc}</label>
+			<label for="exampleFormControlInput1">Audit Commerciale: <#if azienda.getIdArea()==1> ${azienda.auditc}</#if>
+		              <#if azienda.getIdArea()==3  &&  azienda.getNuovoAuditc()!="1-gen-0001"?date> ${azienda.getNuovoAuditc()}
+		              
+		               
+		                </#if></label>
 		    <input name="auditc" type="date" class="form-control" id="exampleFormControlInput1">
    		  </div>
    		  <div class="form-group">
-			<label for="exampleFormControlInput1">Audit Tecnico: ${azienda.auditt}</label>
+			<label for="exampleFormControlInput1">Audit Tecnico:<#if azienda.getIdArea()==1> ${azienda.auditt}</#if>
+		              <#if azienda.getIdArea()==3 &&  azienda.getNuovoAuditt()!="1-gen-0001"?date>
+		               ${azienda.getNuovoAuditt()}
+		             
+		                </#if></label>
 		    <input name="auditt" type="date" class="form-control" id="exampleFormControlInput1">
    		  </div>  
 		  <div class="form-group">

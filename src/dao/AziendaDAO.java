@@ -91,10 +91,10 @@ public class AziendaDAO implements AziendaDAO_interface {
 				String nome=listaaz2.getString("nome");
 				String comune=listaaz2.getString("comune");
 				String auditc=listaaz2.getString("auditc");
-				System.out.println(auditc + " dataaaaaaa");
+				
 				String auditt=listaaz2.getString("auditt");
 
-				System.out.println(auditt + " dataaaaaaa");
+				
 		
 				if(!auditt.equals("")) {
 				
@@ -131,7 +131,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 				
 				Date auditt=listaaz2.getDate("nuovoauditt");
 
-				System.out.println(auditt + " dataaaaaaa");
+				
 				String u="0001-01-01";
 				SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
 				Date date3=formdata.parse(u);
@@ -202,6 +202,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 			Database.connect();
 			ResultSet az=Database.selectRecord("azienda","id=" + id);
 			while(az.next()){
+				int idarea=az.getInt("idarea");
 				
 				String numero=az.getString("numero");
 				String nome=az.getString("nome");
@@ -217,15 +218,22 @@ public class AziendaDAO implements AziendaDAO_interface {
 				String cellulare=az.getString("cellulare");
 				String telefono=az.getString("telefono");
 				String ateco=az.getString("ateco");
-				String auditc=az.getString("auditc");
-			
-				String auditt=az.getString("auditt");
+				
 			
 				String eventuali=az.getString("eventuali");
-				int idarea=az.getInt("idarea");
-				System.out.println(idarea+" id area percheeeeeee");
-				azi=new Azienda(id,numero,nome,comune,rappresentante,sedel,sedeo,codicef,iva,email,pec,cellulare,telefono,ateco,auditc,auditt,eventuali,idarea);
 				
+				System.out.println(idarea+" id area percheeeeeee");
+				if(idarea==1) {
+					String auditc=az.getString("auditc");
+					
+					String auditt=az.getString("auditt");
+				azi=new Azienda(id,numero,nome,comune,rappresentante,sedel,sedeo,codicef,iva,email,pec,cellulare,telefono,ateco,auditc,auditt,eventuali,idarea);
+				}
+				if(idarea==3) {
+					Date nuovoauditc=az.getDate("nuovoauditc");
+					Date nuovoauditt=az.getDate("nuovoauditt");
+					azi=new Azienda(id,numero,nome,comune,rappresentante,sedel,sedeo,codicef,iva,email,pec,cellulare,telefono,ateco,nuovoauditc,nuovoauditt,eventuali,idarea);
+				}
 			}
 			Database.close();
 			
@@ -310,7 +318,7 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 				
 			
 				if(cercaaz!="" && cercacom==""){
-				return DataUtil.searchaz(cercaaz,area);
+				return DataUtil.searchaz(cercaaz,area,1);
 				}
 				
 				if(cercacom!="" && cercaaz==""){
@@ -334,22 +342,23 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 	
 	
 	
-	public static List<Azienda> cercaaz(String cercaaz, int area) throws Exception{
+	public static List<Azienda> cercaaz(String cercaaz, int area, int t) throws Exception{
 		
 		
 		
-				return DataUtil.searchaz(cercaaz,area);
+				return DataUtil.searchaz(cercaaz,area,t);
 				
 				
 			}
 	
-	public static List<Azienda> cercam(String mese, String anno) throws Exception{
+	public static List<Azienda> cercam(String mese, String anno, int area) throws Exception{
 		List<Azienda> lis=new ArrayList<Azienda>();
 		Database.connect();
-		ResultSet listaz=Database.selectRecord("azienda");
+		if(area==1) {
+		ResultSet listaz=Database.selectRecord("azienda","idarea="+ area);
 		while(listaz.next()){
 			String auditc=listaz.getString("auditc");
-			if(auditc!=""){
+			if(!auditc.equals("")){
 			String meseaudc=auditc.substring(3,5);
 			String annoaudc=auditc.substring(6,10);
 			if(meseaudc.equals(mese) && annoaudc.equals(anno)){
@@ -360,11 +369,26 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
                 String comune = listaz.getString("comune");
                 String numero = listaz.getString("numero");
                 
-                Azienda n=new Azienda(id,numero,nome,comune,auditc,auditt);
+                Azienda n=new Azienda(id,numero,nome,comune,auditc,auditt,area);
               lis.add(n);
 			}
 			}
 		}
+		}
+		
+		if(area==3) {
+			ResultSet listaz=Database.selectDate("azienda","MONTH(nuovoauditc)=" + mese +" AND YEAR(nuovoauditc)=" + anno,"nuovoauditc ASC");
+			while(listaz.next()) {
+				int id=listaz.getInt("id");
+				  String nome = listaz.getString("nome");
+	                String comune = listaz.getString("comune");
+	                String numero = listaz.getString("numero");
+	                Date nuovoauditc=listaz.getDate("nuovoauditc");
+	                Azienda n=new Azienda(id,numero,nome,comune,nuovoauditc,area);
+	                lis.add(n);
+			}
+		}
+		
 		Database.close();
 		return lis;
 		
@@ -375,10 +399,12 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 		List<Azienda> lis=new ArrayList<Azienda>();
 		Database.connect();
 		if(area==1) {
-		ResultSet listaz=Database.selectRecord("azienda");
+		ResultSet listaz=Database.selectRecord("azienda","idarea=" + area);
 		while(listaz.next()){
 			String auditt=listaz.getString("auditt");
-			if(auditt!=""){
+			System.out.println(auditt + "ce l'auditt qui dentro");
+			if(!auditt.equals("")){
+				System.out.println("entriiiiii quiiiiii");
 			String meseaudc=auditt.substring(3,5);
 			String annoaudt=auditt.substring(6,10);
 			System.out.println(meseaudc + "mese degli audit tecnici");
@@ -390,7 +416,7 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
                 String comune = listaz.getString("comune");
                 String numero = listaz.getString("numero");
                 
-                Azienda n=new Azienda(id,numero,nome,comune,auditc,auditt);
+                Azienda n=new Azienda(id,numero,nome,comune,auditc,auditt,area);
               lis.add(n);
 			}
 			}

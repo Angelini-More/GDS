@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.AziendaDAO;
+import util.DataUtil;
 import util.Database;
 import util.FreeMarker;
 import util.SecurityLayer;
@@ -147,7 +148,12 @@ String premuto=request.getParameter("tasto");
 			System.out.println(mese+"fasaf");
 			if(nomeaz!=""){
 				try {
-					data.put("lista1", AziendaDAO.cercaaz(nomeaz,area));
+					if(area==1) {
+					data.put("lista1", AziendaDAO.cercaaz(nomeaz,area,1));
+					}
+					if(area==3) {
+						data.put("lista1", DataUtil.searchazpr(nomeaz,area));
+					}
 					data.put("titolo", 1);
 					data.put("mess", nomeaz);
 					FreeMarker.process("auditc.html", data, response, getServletContext());
@@ -159,7 +165,12 @@ String premuto=request.getParameter("tasto");
 			
 			if(mese!="00" && anno!=""){
 				try {
-					data.put("lista1", AziendaDAO.cercam(mese,anno));
+					if(area==1) {
+					data.put("lista1", AziendaDAO.cercam(mese,anno,area));
+					}
+					if(area==3) {
+						data.put("lista1", AziendaDAO.cercam(mese,anno,area));
+					}
 					data.put("titolo", 1);
 					data.put("mess", mese);
 					FreeMarker.process("auditc.html", data, response, getServletContext());

@@ -56,6 +56,33 @@ public class Azienda {
 		
 	}
 	
+	
+	
+	public Azienda(int id,String numero, String nome, String comune, String rappresentante, String sede_legale, String sede_operativa, String codice_fiscale, String iva, String email, String pec, String cellulare, String telefono, String ateco, Date nuovoauditc, Date nuovoauditt, String eventuali,int idarea){
+		this.id = id;
+		this.numero = numero;
+		this.nome = nome;
+		this.comune = comune;
+		this.rappresentante = rappresentante;
+		this.sede_legale = sede_legale;
+		this.sede_operativa = sede_operativa;
+		this.codice_fiscale = codice_fiscale;
+		this.iva = iva;
+		this.email = email;
+		this.pec = pec;
+		this.cellulare = cellulare;
+		this.telefono = telefono;
+		this.ateco = ateco;
+		this.nuovoauditc = nuovoauditc;
+		this.nuovoauditt = nuovoauditt;
+		this.eventuali = eventuali;
+		this.idarea=idarea;
+		
+	}
+	
+	
+	
+	
 	public Azienda(int id,String numero, String nome, String comune, String rappresentante, String sede_legale, String sede_operativa, String codice_fiscale, String iva, String email, String pec, String cellulare, String telefono, String ateco, String auditc, String auditt, String eventuali,String cpi, String riferimento, int idarea){
 		this.id = id;
 		this.numero = numero;
@@ -102,6 +129,11 @@ public class Azienda {
 		this.idcorso=idcorso;
 		
 	}
+	
+	
+	
+	
+	
 	
 	public Azienda(int id,String numero, String nome, String comune, String auditc, String auditt){
 		this.id = id;
