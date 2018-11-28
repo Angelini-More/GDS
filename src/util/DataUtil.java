@@ -255,6 +255,12 @@ if(t==1 && !auditc.equals("")) {
 	 Azienda k = new Azienda(id,numero,nome,comune,auditc,area);
 	 result.add(k);
 }
+
+if(t==1 && auditc.equals("")){
+	Azienda k = new Azienda(id,numero,nome,comune,area);
+	result.add(k);
+}
+
 if(t==2 && !auditt.equals("")) {
 	 Azienda k = new Azienda(id,numero,nome,comune,auditt,area);
 	 result.add(k);

@@ -115,6 +115,14 @@ public class Azienda {
 		
 	}
 	
+	public Azienda(int id,String numero, String nome, String comune, int idarea){
+		this.id = id;
+		this.numero = numero;
+		this.nome = nome;
+		this.comune = comune;
+		this.idarea = idarea;
+	}
+	
 	public Azienda(int id,int idcorsista,int idcorso,String numero, String nome, String comune,String nomecorsista,String cognome,String nomecorso,String datascad, int scaduto){
 		this.id = id;
 		this.numero = numero;
