@@ -82,11 +82,16 @@ if(s!=null){
 		String ateco=request.getParameter("ateco");
 		String auditc=request.getParameter("auditc");
 		String auditt=request.getParameter("auditt");
+		String tamponef="";
 		String eventuali=request.getParameter("eventuali");
+		if((int) s.getAttribute("idarea")==2) {
+			tamponef=request.getParameter("tampone");
+		}
 		SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
 		String h="0001-01-01";
 		Date dataauditt=null;
 		Date dataauditc=null;
+		Date tampone=null;
 	
 			
 
@@ -165,7 +170,7 @@ if(s!=null){
 			agg.put("auditt", auditt);
 		}}
 		
-		if((int) s.getAttribute("idarea")==3 || (int) s.getAttribute("idarea")==4) {
+		if((int) s.getAttribute("idarea")==3 || (int) s.getAttribute("idarea")==2) {
 			if(auditc!="") {
 				
 
@@ -173,10 +178,7 @@ if(s!=null){
 				 try {
 					 SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
 					 dataauditc=formdata.parse(auditc);
-						Calendar datan= Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
-						datan.setTime(dataauditc);
-						datan.add(Calendar.YEAR, 1);
-						dataauditc=datan.getTime();
+						
 						
 					
 					agg.put("nuovoauditc", formdata.format(dataauditc));
@@ -190,10 +192,7 @@ if(s!=null){
 				 try {
 					 SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
 					 dataauditt=formdata.parse(auditt);
-						Calendar datac= Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
-						datac.setTime(dataauditt);
-						datac.add(Calendar.YEAR, 1);
-						dataauditt=datac.getTime();
+						
 					agg.put("nuovoauditt", formdata.format(dataauditt));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
@@ -203,6 +202,22 @@ if(s!=null){
 					
 			
 		}
+		
+		
+		if((int) s.getAttribute("idarea")==2) {
+			if(tamponef!="") {
+				 try {
+					 
+					 tampone=formdata.parse(tamponef);
+						
+						
+					
+					agg.put("tampone", formdata.format(tampone));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}}
 		
 		if(eventuali!=""){
 			agg.put("eventuali", eventuali);

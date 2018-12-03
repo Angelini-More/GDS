@@ -58,30 +58,29 @@ public class Aggiungi extends HttpServlet {
 		SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
 		Date dataauditc=null;
 		Date dataauditt=null;
+		Date tampone=null;
 		if(s!=null){
 			try {
 			
 		String scelta=request.getParameter("inserisci");
 		String auditt="";
 		String auditc="";
+		String tamponef="";
 		if(scelta.equals("yes")){
 		Map<String,Object> agg=new HashMap<String,Object>();
 		
 		 auditc=request.getParameter("auditc");
 		 System.out.println(auditc + "visualizza data auditc");
 		 auditt=request.getParameter("auditt");
+		 tamponef=request.getParameter("tampone");
 		
 	
 		
-		if((int) s.getAttribute("idarea")==3) {
+		if((int) s.getAttribute("idarea")==3 || (int) s.getAttribute("idarea")==2) {
 		
 			if(!auditc.equals("")) {
 			dataauditc= caio.parse(auditc);
-			Calendar datat = Calendar.getInstance();
-			datat.setTime(dataauditc);
-			datat.add(Calendar.YEAR, 1);
-			dataauditc=datat.getTime();
-			System.out.println(dataauditc+ " seeeeeeeeeeeee");
+	
 			} else
 			{
 				String f="0001-01-01";
@@ -89,17 +88,24 @@ public class Aggiungi extends HttpServlet {
 			}
 			if(!auditt.equals("")) {
 		  dataauditt= caio.parse(auditt);
-		 Calendar datar = Calendar.getInstance();
-			datar.setTime(dataauditt);
-			datar.add(Calendar.YEAR, 1);
-			dataauditt=datar.getTime();
-			}
+					}
 			else
 			{
 				String f="0001-01-01";
 				 dataauditt= caio.parse(f);
 			}
 			
+		}
+		
+		if((int) s.getAttribute("idarea")==2) {
+			if(!tamponef.equals("")) {
+				tampone= caio.parse(tamponef);
+		
+				} else
+				{
+					String f="0001-01-01";
+					tampone= caio.parse(f);
+				}
 		}
 		
 		if((int) s.getAttribute("idarea")==1) {
@@ -146,12 +152,16 @@ auditt=giornot+"/"+meset+"/"+annot;}
 		agg.put("auditc", auditc);
 		agg.put("auditt", auditt);
 		}
-		if((int) s.getAttribute("idarea")==3 || (int) s.getAttribute("idarea")==4) {
+		if((int) s.getAttribute("idarea")==3 || (int) s.getAttribute("idarea")==2) {
 			agg.put("auditc", "");
 			agg.put("auditt", "");
 			agg.put("nuovoauditc", caio.format(dataauditc));
 			agg.put("nuovoauditt", caio.format(dataauditt));
 			}
+		
+		if((int) s.getAttribute("idarea")==2) {
+			agg.put("tampone", caio.format(tampone));
+		}
 		
 		agg.put("idarea", s.getAttribute("idarea"));
 		agg.put("eventuali", request.getParameter("eventuali"));

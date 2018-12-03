@@ -57,11 +57,13 @@ public class Auditt extends HttpServlet {
 		data.put("lista2", AziendaDAO.lista2(idarea));
 		
 		FreeMarker.process("auditt.html", data, response, getServletContext());}
-		if(idarea==3) {
+		if(idarea==3 || idarea==2) {
 			data.put("lista2", AziendaDAO.lista3(idarea));
 			
 			FreeMarker.process("auditt.html", data, response, getServletContext());
 		}
+		
+		
 		}else{
 			response.sendRedirect("Log");
 		}
@@ -155,8 +157,8 @@ String premuto=request.getParameter("tasto");
 					if(area==1) {
 					data.put("lista2", AziendaDAO.cercaaz(nomeaz,area,2));
 					}
-					if(area==3) {
-						data.put("lista2", DataUtil.searchazpr(nomeaz,area));
+					if(area==3 || area==2) {
+						data.put("lista2", DataUtil.searchazpr(nomeaz,area,1));
 					}
 					data.put("titolo", 1);
 					data.put("mess", nomeaz);
@@ -172,7 +174,7 @@ String premuto=request.getParameter("tasto");
 					if(area==1) {
 					data.put("lista2", AziendaDAO.cercam1(mese,anno,area));
 					}
-					if(area==3) {
+					if(area==3 || area==2) {
 						data.put("lista2", AziendaDAO.cercam1(mese,anno,area));
 						}
 					data.put("titolo", 1);

@@ -148,4 +148,12 @@
     <servlet-name>Antincendio</servlet-name>
     <url-pattern>/antincendio</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>Tampone</servlet-name>
+    <servlet-class>Servlets.Tampone</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Tampone</servlet-name>
+    <url-pattern>/tampone</url-pattern>
+  </servlet-mapping>
 </web-app>

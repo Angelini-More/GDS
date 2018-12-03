@@ -201,7 +201,7 @@ public class DataUtil {
         //System.out.println(input);
 
         try {
-            String condition = " (nome LIKE '%" + inputa + "%' OR comune LIKE '%" + inputc + "%') AND idarea= " + area;
+            String condition = " (nome LIKE '%" + inputa + "%' AND comune LIKE '%" + inputc + "%') AND idarea= " + area;
             System.out.println(condition + "condizioneeeeeeee");
             //System.out.println(condition);
 
@@ -251,18 +251,19 @@ public class DataUtil {
                 String numero = record.getString("numero");
                 int id = record.getInt("id");
                
-if(t==1 && !auditc.equals("")) {
+if(t==1) {
 	 Azienda k = new Azienda(id,numero,nome,comune,auditc,area);
 	 result.add(k);
 }
 
-if(t==1 && auditc.equals("")){
-	Azienda k = new Azienda(id,numero,nome,comune,area);
-	result.add(k);
-}
 
 if(t==2 && !auditt.equals("")) {
 	 Azienda k = new Azienda(id,numero,nome,comune,auditt,area);
+	 result.add(k);
+}
+
+if(t==3 && !auditc.equals("")) {
+	 Azienda k = new Azienda(id,numero,nome,comune,auditc,area);
 	 result.add(k);
 }
                
@@ -280,7 +281,7 @@ if(t==2 && !auditt.equals("")) {
     
     
     
-    public static List<Azienda> searchazpr(String input, int area) throws Exception {
+    public static List<Azienda> searchazpr(String input, int area, int aud) throws Exception {
 
         List<Azienda> result = new ArrayList<Azienda>();
         SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
@@ -303,13 +304,24 @@ if(t==2 && !auditt.equals("")) {
                 String comune = record.getString("comune");
                 String numero = record.getString("numero");
                 int id = record.getInt("id");
-               
-
-                Azienda k = new Azienda(id,numero,nome,comune,auditc,auditt,area);
+                
+if(aud==1) {
+	if(!(caio.format(auditt)).equals("0001-01-01")) {
+                Azienda k = new Azienda(id,numero,nome,comune,auditt,area);
                 result.add(k);
-            }
+}
+}
+	if(aud==2) {
+		if(!(caio.format(auditc)).equals("0001-01-01")) {
+	                Azienda k = new Azienda(id,numero,nome,comune,auditc,area);
+	                result.add(k);
+	}}
+                
+            
+          
+        }
             Database.close();
-        } catch (SQLException ex) {
+            }catch (SQLException ex) {
             // handle any errors
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());

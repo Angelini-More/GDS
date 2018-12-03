@@ -56,7 +56,7 @@ public class Auditc extends HttpServlet {
 		if(idarea==1) {
 		data.put("lista1", AziendaDAO.lista1(idarea));
 		}
-		if(idarea==3) {
+		if(idarea==3 || idarea==2) {
 			data.put("lista1", AziendaDAO.lista4(idarea));
 		}
 		FreeMarker.process("auditc.html", data, response, getServletContext());
@@ -150,10 +150,10 @@ String premuto=request.getParameter("tasto");
 			if(nomeaz!=""){
 				try {
 					if(area==1) {
-					data.put("lista1", AziendaDAO.cercaaz(nomeaz,area,1));
+					data.put("lista1", AziendaDAO.cercaaz(nomeaz,area,3));
 					}
-					if(area==3) {
-						data.put("lista1", DataUtil.searchazpr(nomeaz,area));
+					if(area==3 || area==2) {
+						data.put("lista1", DataUtil.searchazpr(nomeaz,area,2));
 					}
 					data.put("titolo", 1);
 					data.put("mess", nomeaz);
@@ -169,7 +169,7 @@ String premuto=request.getParameter("tasto");
 					if(area==1) {
 					data.put("lista1", AziendaDAO.cercam(mese,anno,area));
 					}
-					if(area==3) {
+					if(area==3 || area==2) {
 						data.put("lista1", AziendaDAO.cercam(mese,anno,area));
 					}
 					data.put("titolo", 1);

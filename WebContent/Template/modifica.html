@@ -80,7 +80,7 @@
 		  </div>
 		  <div class="form-group">
 			<label for="exampleFormControlInput1">Audit Commerciale: <#if azienda.getIdArea()==1> ${azienda.auditc}</#if>
-		              <#if azienda.getIdArea()==3  &&  azienda.getNuovoAuditc()!="1-gen-0001"?date> ${azienda.getNuovoAuditc()}
+		              <#if (azienda.getIdArea()==3 || azienda.getIdArea()==2)  &&  azienda.getNuovoAuditc()!="1-gen-0001"?date> ${azienda.getNuovoAuditc()}
 		              
 		               
 		                </#if></label>
@@ -88,12 +88,19 @@
    		  </div>
    		  <div class="form-group">
 			<label for="exampleFormControlInput1">Audit Tecnico:<#if azienda.getIdArea()==1> ${azienda.auditt}</#if>
-		              <#if azienda.getIdArea()==3 &&  azienda.getNuovoAuditt()!="1-gen-0001"?date>
+		              <#if (azienda.getIdArea()==3 || azienda.getIdArea()==2) &&  azienda.getNuovoAuditt()!="1-gen-0001"?date>
 		               ${azienda.getNuovoAuditt()}
 		             
 		                </#if></label>
 		    <input name="auditt" type="date" class="form-control" id="exampleFormControlInput1">
    		  </div>  
+   		  <#if ciao==2>
+   		   <div class="form-group">
+			<label for="exampleFormControlInput1">Tampone:<#if azienda.getTampone()!="1-gen-0001"?date> ${azienda.tampone}</#if>
+		             </label>
+		    <input name="tampone" type="date" class="form-control" id="exampleFormControlInput1">
+   		  </div>
+   		  </#if>  
 		  <div class="form-group">
 		    <label for="inputAddress">Eventuali: ${azienda.eventuali}</label>
 		    <input type="text" class="form-control" id="inputAddress" name="eventuali">

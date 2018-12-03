@@ -195,6 +195,46 @@ public class AziendaDAO implements AziendaDAO_interface {
 	
 	
 	
+	public static List<Azienda> lista5(int idarea){
+		List<Azienda> aziende2=new ArrayList<Azienda>();
+		try {
+			Database.connect();
+			ResultSet listaaz2=Database.selectRecordCond2("azienda","azienda.idarea="+idarea, "azienda.tampone ASC");
+			while(listaaz2.next()){
+				int id=listaaz2.getInt("id");
+				String numero=listaaz2.getString("numero");
+				String nome=listaaz2.getString("nome");
+				String comune=listaaz2.getString("comune");
+				
+				
+				
+				Date tampone=listaaz2.getDate("tampone");
+
+				
+				String u="0001-01-01";
+				SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
+				Date date3=formdata.parse(u);
+				if(tampone.compareTo(date3)>0 || tampone.compareTo(date3)<0) {
+				
+
+				Azienda x=new Azienda(id,numero, nome,comune,tampone,idarea);
+				aziende2.add(x);
+			} }
+			Database.close();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return aziende2;
+	}
+	
+	
+	
+	
+	
+	
 	
 	public static Azienda specifica(int id){
 		Azienda azi=null;
@@ -234,6 +274,14 @@ public class AziendaDAO implements AziendaDAO_interface {
 					Date nuovoauditt=az.getDate("nuovoauditt");
 					azi=new Azienda(id,numero,nome,comune,rappresentante,sedel,sedeo,codicef,iva,email,pec,cellulare,telefono,ateco,nuovoauditc,nuovoauditt,eventuali,idarea);
 				}
+				
+				if(idarea==2) {
+					Date nuovoauditc=az.getDate("nuovoauditc");
+					Date nuovoauditt=az.getDate("nuovoauditt");
+					Date tampone=az.getDate("tampone");
+					
+					azi=new Azienda(id,numero,nome,comune,rappresentante,sedel,sedeo,codicef,iva,email,pec,cellulare,telefono,ateco,nuovoauditc,nuovoauditt,tampone,eventuali,idarea);
+				}
 			}
 			Database.close();
 			
@@ -261,6 +309,10 @@ public class AziendaDAO implements AziendaDAO_interface {
 			}
 			if(area==3) {
 				Database.deleteRecord("privacydoc","privacydoc.idazienda="+id);
+				Database.deleteRecord("note","note.idazienda="+id);
+				Database.deleteRecord("azienda", "id = " + id);
+			}
+			if(area==2) {
 				Database.deleteRecord("note","note.idazienda="+id);
 				Database.deleteRecord("azienda", "id = " + id);
 			}
@@ -376,8 +428,8 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 		}
 		}
 		
-		if(area==3) {
-			ResultSet listaz=Database.selectDate("azienda","MONTH(nuovoauditc)=" + mese +" AND YEAR(nuovoauditc)=" + anno,"nuovoauditc ASC");
+		if(area==3 || area==2) {
+			ResultSet listaz=Database.selectDate("azienda","MONTH(nuovoauditc)=" + mese +" AND YEAR(nuovoauditc)=" + anno + " AND idarea="+area,"nuovoauditc ASC");
 			while(listaz.next()) {
 				int id=listaz.getInt("id");
 				  String nome = listaz.getString("nome");
@@ -422,8 +474,8 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 			}
 		}
 		}
-		if(area==3) {
-			ResultSet listaz=Database.selectDate("azienda","MONTH(nuovoauditt)=" + mese +" AND YEAR(nuovoauditt)=" + anno,"nuovoauditt ASC");
+		if(area==3 || area==2) {
+			ResultSet listaz=Database.selectDate("azienda","MONTH(nuovoauditt)=" + mese +" AND YEAR(nuovoauditt)=" + anno + " AND idarea="+area,"nuovoauditt ASC");
 			while(listaz.next()) {
 				int id=listaz.getInt("id");
 				  String nome = listaz.getString("nome");
