@@ -156,4 +156,13 @@
     <servlet-name>Tampone</servlet-name>
     <url-pattern>/tampone</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>Presentazione</servlet-name>
+    <servlet-class>Servlets.Presentazione</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Presentazione</servlet-name>
+    <url-pattern>/presentazione</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

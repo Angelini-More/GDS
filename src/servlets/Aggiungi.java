@@ -59,6 +59,7 @@ public class Aggiungi extends HttpServlet {
 		Date dataauditc=null;
 		Date dataauditt=null;
 		Date tampone=null;
+		Date presentazione=null;
 		if(s!=null){
 			try {
 			
@@ -66,6 +67,7 @@ public class Aggiungi extends HttpServlet {
 		String auditt="";
 		String auditc="";
 		String tamponef="";
+		String presentazionef="";
 		if(scelta.equals("yes")){
 		Map<String,Object> agg=new HashMap<String,Object>();
 		
@@ -73,6 +75,7 @@ public class Aggiungi extends HttpServlet {
 		 System.out.println(auditc + "visualizza data auditc");
 		 auditt=request.getParameter("auditt");
 		 tamponef=request.getParameter("tampone");
+		 presentazionef=request.getParameter("presentazione");
 		
 	
 		
@@ -105,6 +108,18 @@ public class Aggiungi extends HttpServlet {
 				{
 					String f="0001-01-01";
 					tampone= caio.parse(f);
+				}
+		}
+		
+		
+		if((int) s.getAttribute("idarea")==4) {
+			if(!presentazionef.equals("")) {
+				presentazione= caio.parse(presentazionef);
+		
+				} else
+				{
+					String f="0001-01-01";
+					presentazione= caio.parse(f);
 				}
 		}
 		
@@ -161,6 +176,12 @@ auditt=giornot+"/"+meset+"/"+annot;}
 		
 		if((int) s.getAttribute("idarea")==2) {
 			agg.put("tampone", caio.format(tampone));
+		}
+		
+		if((int) s.getAttribute("idarea")==4) {
+			agg.put("presentazione", caio.format(presentazione));
+			agg.put("cpi", request.getParameter("cpi"));
+			agg.put("riferimento", request.getParameter("riferimento"));
 		}
 		
 		agg.put("idarea", s.getAttribute("idarea"));

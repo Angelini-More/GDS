@@ -82,6 +82,7 @@
 			           <td class="testo"><i class="glyphicon glyphicon-stats"></i> Classificazione Ateco</td>
 		               <td>${azienda.ateco}</td>
 				  </tr>
+				  <#if ciao==1 || ciao==2 || ciao==3>
 				  <tr>
 			           <td class="testo"><i class="glyphicon glyphicon-calendar"></i> Scadenza Audit Commerciale</td>
 		              <#if azienda.getIdArea()==1> <td>${azienda.auditc}</td></#if>
@@ -99,6 +100,7 @@
 		                <td></td>
 		                </#if>
 				  </tr>
+				  </#if>
 				  <#if ciao==2>
 				  	  <tr>
 			           <td class="testo"><i class="glyphicon glyphicon-calendar"></i> Scadenza Tampone</td>
@@ -112,6 +114,25 @@
 					   <td class="testo"><i class="glyphicon glyphicon-tag"></i> Eventuali</td>
 			           <td>${azienda.eventuali}</td>
 			       </tr>
+			       
+			        <#if ciao==4>
+			         <tr>
+					   <td class="testo"><i class="glyphicon glyphicon-tag"></i> Tipo di CPI</td>
+			           <td>${azienda.cpi}</td>
+			       </tr>
+				  	  <tr>
+			           <td class="testo"><i class="glyphicon glyphicon-calendar"></i> Scadenza data di presentazione</td>
+		               <#if azienda.presentazione!="1-gen-0001"?date>
+		               <td>${azienda.presentazione}</td>
+		               </#if>
+		             <td></td>
+				  </tr>
+				   <tr>
+					   <td class="testo"><i class="glyphicon glyphicon-tag"></i>Comando di riferimento</td>
+			           <td>${azienda.riferimento}</td>
+			       </tr>
+				  </#if>
+			       
 				  
 			     
 			      
@@ -120,7 +141,9 @@
                                                 
           </div>
  		</div>
+ 		<#if ciao==1>
 		<a class="btn btn-default" href="Formazione" role="button"><h3 class="testo">AREA FORMAZIONE</h3></a>
+		</#if>
 		<a class="btn btn-default" href="AzioneNote" role="button"><h3 class="testo">NOTE</h3></a>
 		<#if azienda.getIdArea()==1>
 		<a class="btn btn-default" href="DocSicurezza" role="button"><h3 class="testo">DOC. SICUREZZA</h3></a>

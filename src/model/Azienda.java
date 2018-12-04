@@ -34,6 +34,7 @@ public class Azienda {
 	private Date nuovoauditt;
 	private Date nuovoauditc;
 	private Date tampone;
+	private Date presentazione;
 	
 	public Azienda(int id,String numero, String nome, String comune, String rappresentante, String sede_legale, String sede_operativa, String codice_fiscale, String iva, String email, String pec, String cellulare, String telefono, String ateco, String auditc, String auditt, String eventuali,int idarea){
 		this.id = id;
@@ -108,6 +109,33 @@ public class Azienda {
 		this.idarea=idarea;
 		this.tampone=tampone;
 	}
+	
+	
+	
+	public Azienda(int id,String numero, String nome, String comune, String rappresentante, String sede_legale, String sede_operativa, String codice_fiscale, String iva, String email, String pec, String cellulare, String telefono, String ateco, Date presentazione, String cpi, String riferimento, String eventuali, int idarea){
+		this.id = id;
+		this.numero = numero;
+		this.nome = nome;
+		this.comune = comune;
+		this.rappresentante = rappresentante;
+		this.sede_legale = sede_legale;
+		this.sede_operativa = sede_operativa;
+		this.codice_fiscale = codice_fiscale;
+		this.iva = iva;
+		this.email = email;
+		this.pec = pec;
+		this.cellulare = cellulare;
+		this.telefono = telefono;
+		this.ateco = ateco;
+		this.riferimento = riferimento;
+		this.cpi = cpi;
+		this.eventuali = eventuali;
+		this.idarea=idarea;
+		this.presentazione=presentazione;
+	}
+	
+	
+	
 	
 	
 	
@@ -481,6 +509,14 @@ public class Azienda {
 	
 	public Date getTampone(){
 		return tampone;
+	}
+	
+	public void setPresentazione(Date presentazione){
+		this.presentazione = presentazione;
+	}
+	
+	public Date getPresentazione(){
+		return presentazione;
 	}
 	
 	

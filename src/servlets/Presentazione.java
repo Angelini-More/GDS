@@ -27,14 +27,14 @@ import util.SecurityLayer;
 /**
  * Servlet implementation class Tampone
  */
-@WebServlet("/Tampone")
-public class Tampone extends HttpServlet {
+@WebServlet("/Presentazione")
+public class Presentazione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Map data= new HashMap<String, Object>();   
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Tampone() {
+    public Presentazione() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,9 +46,9 @@ public class Tampone extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession s = SecurityLayer.checkSession(request);
 		if(s!=null){
-			data.put("lista2", AziendaDAO.lista5((int) s.getAttribute("idarea")));
+			data.put("lista2", AziendaDAO.lista6((int) s.getAttribute("idarea")));
 		data.put("ciao", s.getAttribute("idarea"));
-		FreeMarker.process("tampone.html", data, response, getServletContext());
+		FreeMarker.process("presentazione.html", data, response, getServletContext());
 		}
 		else {
 			response.sendRedirect("Log");
@@ -65,7 +65,7 @@ public class Tampone extends HttpServlet {
 String premuto=request.getParameter("tasto");
 int area=(int) s.getAttribute("idarea");
 
-if(premuto.equals("aggtampo")){
+if(premuto.equals("aggpres")){
 	int id=Integer.parseInt(request.getParameter("id"));
 	String datascadaudt="";
 	Map<String,Object> a=new HashMap<String,Object>();
@@ -76,12 +76,12 @@ if(premuto.equals("aggtampo")){
 		ResultSet azienda=Database.selectRecord("azienda","id=" +id);
 		while(azienda.next()){
 			SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
-			Date datac=azienda.getDate("tampone");
+			Date datac=azienda.getDate("presentazione");
 			Calendar datan= Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
 			datan.setTime(datac);
-			datan.add(Calendar.YEAR, 1);
+			datan.add(Calendar.YEAR, 5);
 			datac=datan.getTime();
-			a.put("tampone", caio.format(datac));
+			a.put("presentazione", caio.format(datac));
 			Database.updateRecord("azienda", a, "id=" + id);
 		}
 	
@@ -99,7 +99,7 @@ if(premuto.equals("si")) {
 	SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
 	try {
 		Date dataauditt= caio.parse(auditzero);
-		f.put("tampone", caio.format(dataauditt));
+		f.put("presentazione", caio.format(dataauditt));
 		Database.connect();
 		Database.updateRecord("azienda",f,"azienda.id="+id);
 					Database.close();
@@ -127,12 +127,12 @@ if(premuto.equals("cerca")){
 if(nomeaz!=""){
 	try {
 		
-		if(area==2) {
-			data.put("lista2", DataUtil.searchazprtam(nomeaz,area));
+		if(area==4) {
+			data.put("lista2", DataUtil.searchazpresenta(nomeaz,area));
 		}
 		data.put("titolo", 1);
 		data.put("mess", nomeaz);
-		FreeMarker.process("tampone.html", data, response, getServletContext());
+		FreeMarker.process("presentazione.html", data, response, getServletContext());
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -142,12 +142,12 @@ if(nomeaz!=""){
 if(mese!="00" && anno!=""){
 	try {
 	
-		if(area==2) {
-			data.put("lista2", AziendaDAO.cercam1tamp(mese,anno,area));
+		if(area==4) {
+			data.put("lista2", AziendaDAO.cercam1pre(mese,anno,area));
 			}
 		data.put("titolo", 1);
 		data.put("mess", mese);
-		FreeMarker.process("tampone.html", data, response, getServletContext());
+		FreeMarker.process("presentazione.html", data, response, getServletContext());
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

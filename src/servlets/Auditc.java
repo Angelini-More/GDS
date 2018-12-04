@@ -78,7 +78,7 @@ String premuto=request.getParameter("tasto");
 		
 		if(premuto.equals("si")){
 			int id=Integer.parseInt(request.getParameter("id"));
-			System.out.println(id + "idddddddddddd");
+	
 			AziendaDAO.azzeradata(id,0,area);
 			
 			}
@@ -116,7 +116,7 @@ String premuto=request.getParameter("tasto");
 					Database.updateRecord("azienda",a,"id=" + id);
 					
 					
-					}if(area==3) {
+					}if(area==3 || area==2) {
 						SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
 						Date datac=azienda.getDate("nuovoauditc");
 						Calendar datan= Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
@@ -126,6 +126,8 @@ String premuto=request.getParameter("tasto");
 						a.put("nuovoauditc", caio.format(datac));
 						Database.updateRecord("azienda", a, "id=" + id);
 					}
+					
+			
 					/*LocalDate date = LocalDate.of(anno, mese, giorno);
 					a.put("auditc", date.plusYears(1));
 					Database.updateRecord("azienda",a,"id=" + id);*/

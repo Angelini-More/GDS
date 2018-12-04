@@ -233,6 +233,46 @@ public class AziendaDAO implements AziendaDAO_interface {
 	
 	
 	
+	public static List<Azienda> lista6(int idarea){
+		List<Azienda> aziende2=new ArrayList<Azienda>();
+		try {
+			Database.connect();
+			ResultSet listaaz2=Database.selectRecordCond2("azienda","azienda.idarea="+idarea, "azienda.presentazione ASC");
+			while(listaaz2.next()){
+				int id=listaaz2.getInt("id");
+				String numero=listaaz2.getString("numero");
+				String nome=listaaz2.getString("nome");
+				String comune=listaaz2.getString("comune");
+				
+				
+				
+				Date presentazione=listaaz2.getDate("presentazione");
+
+				
+				String u="0001-01-01";
+				SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
+				Date date3=formdata.parse(u);
+				if(presentazione.compareTo(date3)>0 || presentazione.compareTo(date3)<0) {
+				
+
+				Azienda x=new Azienda(id,numero, nome,comune,presentazione,idarea);
+				aziende2.add(x);
+			} }
+			Database.close();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return aziende2;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -282,6 +322,15 @@ public class AziendaDAO implements AziendaDAO_interface {
 					
 					azi=new Azienda(id,numero,nome,comune,rappresentante,sedel,sedeo,codicef,iva,email,pec,cellulare,telefono,ateco,nuovoauditc,nuovoauditt,tampone,eventuali,idarea);
 				}
+				
+				if(idarea==4) {
+					Date presentazione=az.getDate("presentazione");
+					String riferimento=az.getString("riferimento");
+					String cpi=az.getString("cpi");
+				
+					
+					azi=new Azienda(id,numero,nome,comune,rappresentante,sedel,sedeo,codicef,iva,email,pec,cellulare,telefono,ateco,presentazione,riferimento,cpi,eventuali,idarea);
+				}
 			}
 			Database.close();
 			
@@ -312,7 +361,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 				Database.deleteRecord("note","note.idazienda="+id);
 				Database.deleteRecord("azienda", "id = " + id);
 			}
-			if(area==2) {
+			if(area==2 || area==4) {
 				Database.deleteRecord("note","note.idazienda="+id);
 				Database.deleteRecord("azienda", "id = " + id);
 			}
@@ -339,11 +388,11 @@ public static void azzeradata(int id,int serve, int area){
 				f.put("auditt", a);	
 			} 
 			
-			if(serve==1 && area==3){
+			if(serve==1 && (area==3 || area==2)){
 				f.put("nuovoauditt", caio.format(dataauditt));	
 			} 
 			
-			if(serve!=1 && area==3){
+			if(serve!=1 && (area==3 || area==2)){
 				f.put("nuovoauditc", caio.format(dataauditt));	
 			} 
 			if(serve!=1 && area==1) {
@@ -491,6 +540,63 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 		
 		
 	}
+	
+	
+	
+	
+	
+	public static List<Azienda> cercam1tamp(String mese,String anno,int area) throws Exception{
+		List<Azienda> lis=new ArrayList<Azienda>();
+		Database.connect();
+
+		if(area==2) {
+			ResultSet listaz=Database.selectDate("azienda","MONTH(tampone)=" + mese +" AND YEAR(tampone)=" + anno + " AND idarea="+area,"tampone ASC");
+			while(listaz.next()) {
+				int id=listaz.getInt("id");
+				  String nome = listaz.getString("nome");
+	                String comune = listaz.getString("comune");
+	                String numero = listaz.getString("numero");
+	                Date tampone=listaz.getDate("tampone");
+	                Azienda n=new Azienda(id,numero,nome,comune,tampone,area);
+	                lis.add(n);
+			}
+		}
+		Database.close();
+		return lis;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	public static List<Azienda> cercam1pre(String mese,String anno,int area) throws Exception{
+		List<Azienda> lis=new ArrayList<Azienda>();
+		Database.connect();
+
+		if(area==4) {
+			ResultSet listaz=Database.selectDate("azienda","MONTH(presentazione)=" + mese +" AND YEAR(presentazione)=" + anno + " AND idarea="+area,"presentazione ASC");
+			while(listaz.next()) {
+				int id=listaz.getInt("id");
+				  String nome = listaz.getString("nome");
+	                String comune = listaz.getString("comune");
+	                String numero = listaz.getString("numero");
+	                Date presentazione=listaz.getDate("presentazione");
+	                Azienda n=new Azienda(id,numero,nome,comune,presentazione,area);
+	                lis.add(n);
+			}
+		}
+		Database.close();
+		return lis;
+		
+		
+	}
+	
+	
+	
+	
 	
 	public static List<Note> noteaz(int id) throws Exception{
 		List<Note> lis=new ArrayList<Note>();

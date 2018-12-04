@@ -78,6 +78,7 @@
 		    <label for="inputAddress">Classificazione Ateco: ${azienda.ateco}</label>
 		    <input type="text" class="form-control" id="inputAddress" name="ateco">
 		  </div>
+		  <#if ciao==1 || ciao==2 || ciao==3>
 		  <div class="form-group">
 			<label for="exampleFormControlInput1">Audit Commerciale: <#if azienda.getIdArea()==1> ${azienda.auditc}</#if>
 		              <#if (azienda.getIdArea()==3 || azienda.getIdArea()==2)  &&  azienda.getNuovoAuditc()!="1-gen-0001"?date> ${azienda.getNuovoAuditc()}
@@ -94,6 +95,7 @@
 		                </#if></label>
 		    <input name="auditt" type="date" class="form-control" id="exampleFormControlInput1">
    		  </div>  
+   		  </#if>
    		  <#if ciao==2>
    		   <div class="form-group">
 			<label for="exampleFormControlInput1">Tampone:<#if azienda.getTampone()!="1-gen-0001"?date> ${azienda.tampone}</#if>
@@ -106,6 +108,23 @@
 		    <input type="text" class="form-control" id="inputAddress" name="eventuali">
 		    <input type="hidden" name="id" value="${azienda.id}">
 		  </div>
+		  <#if ciao==4>
+		  <div class="form-group">
+			<label for="exampleFormControlInput1">Data di presentazione:<#if azienda.getPresentazione()!="1-gen-0001"?date> ${azienda.presentazione}</#if>
+		             </label>
+		    <input name="presentazione" type="date" class="form-control" id="exampleFormControlInput1">
+   		  </div>
+   		   <div class="form-group">
+		    <label for="inputAddress">Tipo di CPI: ${azienda.cpi}</label>
+		    <input type="text" class="form-control" id="inputAddress" name="cpi">
+		    <input type="hidden" name="id" value="${azienda.id}">
+		  </div>
+		   <div class="form-group">
+		    <label for="inputAddress">Comando di riferimento: ${azienda.riferimento}</label>
+		    <input type="text" class="form-control" id="inputAddress" name="riferimento">
+		    <input type="hidden" name="id" value="${azienda.id}">
+		  </div>
+		  </#if>
 		  
 		  <button type="submit" class="btn btn-default" name="decisione" value="salva">SALVA</button>
 		  <button type="submit" class="btn btn-default" name="decisione" value="annulla">ANNULLA</button>

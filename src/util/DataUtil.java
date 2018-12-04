@@ -334,6 +334,108 @@ if(aud==1) {
     
     
     
+    public static List<Azienda> searchazprtam(String input, int area) throws Exception {
+
+        List<Azienda> result = new ArrayList<Azienda>();
+        SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
+        Database.connect();
+        //System.out.println(input);
+
+        try {
+            String condition = " nome LIKE '%" + input + "%' AND idarea=" + area;
+            //System.out.println(condition);
+
+            ResultSet record = Database.selectRecord("azienda", condition);
+            while (record.next()) {
+            	
+            	Date tampone=record.getDate("tampone");
+            	
+            	
+          
+            	
+                String nome = record.getString("nome");
+                String comune = record.getString("comune");
+                String numero = record.getString("numero");
+                int id = record.getInt("id");
+                
+
+	if(!(caio.format(tampone)).equals("0001-01-01")) {
+                Azienda k = new Azienda(id,numero,nome,comune,tampone,area);
+                result.add(k);
+	
+                
+            
+          
+        }
+            
+            }
+            Database.close();
+            }catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return result;
+    }
+    
+    
+    
+    
+    
+    
+    public static List<Azienda> searchazpresenta(String input, int area) throws Exception {
+
+        List<Azienda> result = new ArrayList<Azienda>();
+        SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
+        Database.connect();
+        //System.out.println(input);
+
+        try {
+            String condition = " nome LIKE '%" + input + "%' AND idarea=" + area;
+            //System.out.println(condition);
+
+            ResultSet record = Database.selectRecord("azienda", condition);
+            while (record.next()) {
+            	
+            	Date presentazione=record.getDate("presentazione");
+            	
+            	
+          
+            	
+                String nome = record.getString("nome");
+                String comune = record.getString("comune");
+                String numero = record.getString("numero");
+                int id = record.getInt("id");
+                
+
+	if(!(caio.format(presentazione)).equals("0001-01-01")) {
+                Azienda k = new Azienda(id,numero,nome,comune,presentazione,area);
+                result.add(k);
+	
+                
+            
+          
+        }
+            
+            }
+            Database.close();
+            }catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return result;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     public static List<Azienda> searchcom(String input, int area) throws Exception {
 
         List<Azienda> result = new ArrayList<Azienda>();

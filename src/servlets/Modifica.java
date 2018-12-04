@@ -83,16 +83,25 @@ if(s!=null){
 		String auditc=request.getParameter("auditc");
 		String auditt=request.getParameter("auditt");
 		String tamponef="";
+		String presentazionef="";
+		String cpi="";
+		String riferimento="";
 		String eventuali=request.getParameter("eventuali");
+		
 		if((int) s.getAttribute("idarea")==2) {
 			tamponef=request.getParameter("tampone");
+		}
+		if((int) s.getAttribute("idarea")==4) {
+			 cpi=request.getParameter("cpi");
+			 riferimento=request.getParameter("riferimento");
+			presentazionef=request.getParameter("presentazione");
 		}
 		SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
 		String h="0001-01-01";
 		Date dataauditt=null;
 		Date dataauditc=null;
 		Date tampone=null;
-	
+		Date presentazione=null;
 			
 
 
@@ -202,6 +211,27 @@ if(s!=null){
 					
 			
 		}
+		
+		
+		if((int) s.getAttribute("idarea")==4) {
+			if(presentazionef!="") {
+				 try {
+					 
+					 presentazione=formdata.parse(presentazionef);
+					 if(riferimento!=""){
+							agg.put("riferimento", riferimento);
+						}
+					 if(cpi!=""){
+							agg.put("cpi", cpi);
+						}
+						
+					
+					agg.put("presentazione", formdata.format(presentazione));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}}
 		
 		
 		if((int) s.getAttribute("idarea")==2) {

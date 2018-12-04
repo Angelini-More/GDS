@@ -79,6 +79,7 @@
 		    <label for="inputAddress">Classificazione Ateco</label>
 		    <input type="text" name="ateco" class="form-control" id="inputAddress" placeholder="Ateco">
 		  </div>
+		  <#if ciao==1 || ciao==2 || ciao==3>
 		  <div class="form-group">
 			<label for="exampleFormControlInput1">Audit Commerciale</label>
 		    <input name="auditc" type="date" class="form-control" id="exampleFormControlInput1">
@@ -87,6 +88,7 @@
 			<label for="exampleFormControlInput1">Audit Tecnico</label>
 		    <input name="auditt" type="date" class="form-control" id="exampleFormControlInput1">
    		  </div>
+   		  </#if>
    		  <#if ciao==2>
    		  <div class="form-group">
 			<label for="exampleFormControlInput1">Tampone</label>
@@ -97,6 +99,20 @@
 		    <label for="inputAddress">Eventuali</label>
 		    <input type="text" name="eventuali" class="form-control" id="inputAddress" placeholder="Eventuali">
 		  </div>
+		  <#if ciao==4>
+		   <div class="form-group">
+		    <label for="inputAddress">Tipo di CPI</label>
+		    <input type="text" name="cpi" class="form-control" id="inputAddress" placeholder="tipo di cpi">
+		  </div>
+		   <div class="form-group">
+		    <label for="inputAddress">Data di presentazione</label>
+		     <input name="presentazione" type="date" class="form-control" id="exampleFormControlInput1">
+		  </div>
+		   <div class="form-group">
+		    <label for="inputAddress">Comando di riferimento</label>
+		    <input type="text" name="riferimento" class="form-control" id="inputAddress" placeholder="comando di riferimento">
+		  </div>
+		  </#if>
 		  
 		  <button type="submit" name="inserisci" value="yes" class="btn btn-default">INSERISCI</button>
 		  <button type="submit" name="inserisci" value="no" class="btn btn-default">ANNULLA</button>
