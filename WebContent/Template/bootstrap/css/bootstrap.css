@@ -6787,6 +6787,11 @@ button.close {
   margin-left: 71%;
 }
 
+.ddd{
+  margin-left: 10%;
+}
+
+
 #footer {
 position: static;
 bottom: 0;
@@ -7011,4 +7016,20 @@ a.btn.btn-default.nero {
 
 .mod2 {
   width: 40%;
+}
+
+.sicurezza {
+	color: grey;
+}
+
+.antincendio {
+	color: red;
+}
+
+.privacy {
+	color: blue;
+}
+
+.haccp {
+	color: orange;
 }
