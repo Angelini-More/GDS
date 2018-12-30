@@ -107,7 +107,7 @@ public class DocHaccp extends HttpServlet {
 			{
 				try {
 					Database.connect();
-					agg.put("data", "0001-01-01");
+					agg.put("data", "2001-01-01");
 					agg.put("flag", 0);
 					Database.updateRecord("haccpdoc", agg, "haccpdoc.id="+idd);
 					Database.close();

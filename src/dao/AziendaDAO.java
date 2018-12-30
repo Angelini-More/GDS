@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import model.Azienda;
@@ -117,6 +118,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 	
 	
 	public static List<Azienda> lista3(int idarea){
+		Locale.setDefault(Locale.ITALIAN);
 		List<Azienda> aziende2=new ArrayList<Azienda>();
 		try {
 			Database.connect();
@@ -132,7 +134,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 				Date auditt=listaaz2.getDate("nuovoauditt");
 
 				
-				String u="0001-01-01";
+				String u="2001-01-01";
 				SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
 				Date date3=formdata.parse(u);
 				if(auditt.compareTo(date3)==1 || auditt.compareTo(date3)==-1) {
@@ -156,6 +158,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 	
 	
 	public static List<Azienda> lista4(int idarea){
+		Locale.setDefault(Locale.ITALIAN);
 		List<Azienda> aziende2=new ArrayList<Azienda>();
 		try {
 			Database.connect();
@@ -171,7 +174,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 				Date auditc=listaaz2.getDate("nuovoauditc");
 
 				
-				String u="0001-01-01";
+				String u="2001-01-01";
 				SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
 				Date date3=formdata.parse(u);
 				if(auditc.compareTo(date3)==1 || auditc.compareTo(date3)==-1) {
@@ -196,6 +199,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 	
 	
 	public static List<Azienda> lista5(int idarea){
+		Locale.setDefault(Locale.ITALIAN);
 		List<Azienda> aziende2=new ArrayList<Azienda>();
 		try {
 			Database.connect();
@@ -211,7 +215,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 				Date tampone=listaaz2.getDate("tampone");
 
 				
-				String u="0001-01-01";
+				String u="2001-01-01";
 				SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
 				Date date3=formdata.parse(u);
 				if(tampone.compareTo(date3)>0 || tampone.compareTo(date3)<0) {
@@ -234,6 +238,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 	
 	
 	public static List<Azienda> lista6(int idarea){
+		Locale.setDefault(Locale.ITALIAN);
 		List<Azienda> aziende2=new ArrayList<Azienda>();
 		try {
 			Database.connect();
@@ -249,7 +254,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 				Date presentazione=listaaz2.getDate("presentazione");
 
 				
-				String u="0001-01-01";
+				String u="2001-01-01";
 				SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
 				Date date3=formdata.parse(u);
 				if(presentazione.compareTo(date3)>0 || presentazione.compareTo(date3)<0) {
@@ -277,6 +282,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 	
 	
 	public static Azienda specifica(int id){
+		Locale.setDefault(Locale.ITALIAN);
 		Azienda azi=null;
 		try {
 			Database.connect();
@@ -316,6 +322,7 @@ public class AziendaDAO implements AziendaDAO_interface {
 				}
 				
 				if(idarea==2) {
+					
 					Date nuovoauditc=az.getDate("nuovoauditc");
 					Date nuovoauditt=az.getDate("nuovoauditt");
 					Date tampone=az.getDate("tampone");
@@ -378,10 +385,11 @@ public class AziendaDAO implements AziendaDAO_interface {
 	
 	
 public static void azzeradata(int id,int serve, int area){
+	Locale.setDefault(Locale.ITALIAN);
 		Map<String,Object> f=new HashMap<String,Object>();
 		try {
 			String a="";
-			String auditzero="0001-01-01";
+			String auditzero="2001-01-01";
 			SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
 			Date dataauditt= caio.parse(auditzero);
 			if(serve==1 && area==1){
@@ -453,6 +461,7 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 			}
 	
 	public static List<Azienda> cercam(String mese, String anno, int area) throws Exception{
+		Locale.setDefault(Locale.ITALIAN);
 		List<Azienda> lis=new ArrayList<Azienda>();
 		Database.connect();
 		if(area==1) {
@@ -497,6 +506,7 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 	}
 	
 	public static List<Azienda> cercam1(String mese,String anno,int area) throws Exception{
+		Locale.setDefault(Locale.ITALIAN);
 		List<Azienda> lis=new ArrayList<Azienda>();
 		Database.connect();
 		if(area==1) {
@@ -546,6 +556,7 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 	
 	
 	public static List<Azienda> cercam1tamp(String mese,String anno,int area) throws Exception{
+		Locale.setDefault(Locale.ITALIAN);
 		List<Azienda> lis=new ArrayList<Azienda>();
 		Database.connect();
 
@@ -573,6 +584,7 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 	
 	
 	public static List<Azienda> cercam1pre(String mese,String anno,int area) throws Exception{
+		Locale.setDefault(Locale.ITALIAN);
 		List<Azienda> lis=new ArrayList<Azienda>();
 		Database.connect();
 
@@ -599,6 +611,7 @@ Database.updateRecord("azienda",f,"azienda.id="+id);
 	
 	
 	public static List<Note> noteaz(int id) throws Exception{
+		Locale.setDefault(Locale.ITALIAN);
 		List<Note> lis=new ArrayList<Note>();
 		Database.connect();
 		ResultSet listaz=Database.selectRecord("note","idazienda=" + id);

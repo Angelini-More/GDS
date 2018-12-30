@@ -95,7 +95,7 @@ if(premuto.equals("si")) {
 	Map<String,Object> f=new HashMap<String,Object>();
 	int id=Integer.parseInt(request.getParameter("id"));
 	System.out.println(id + "idddddddddddd");
-	String auditzero="0001-01-01";
+	String auditzero="2001-01-01";
 	SimpleDateFormat caio = new SimpleDateFormat("yyyy-MM-dd");
 	try {
 		Date dataauditt= caio.parse(auditzero);

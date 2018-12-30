@@ -86,7 +86,7 @@ public class Aggiungi extends HttpServlet {
 	
 			} else
 			{
-				String f="0001-01-01";
+				String f="2001-01-01";
 				dataauditc= caio.parse(f);
 			}
 			if(!auditt.equals("")) {
@@ -94,7 +94,7 @@ public class Aggiungi extends HttpServlet {
 					}
 			else
 			{
-				String f="0001-01-01";
+				String f="2001-01-01";
 				 dataauditt= caio.parse(f);
 			}
 			
@@ -106,7 +106,7 @@ public class Aggiungi extends HttpServlet {
 		
 				} else
 				{
-					String f="0001-01-01";
+					String f="2001-01-01";
 					tampone= caio.parse(f);
 				}
 		}
@@ -118,7 +118,7 @@ public class Aggiungi extends HttpServlet {
 		
 				} else
 				{
-					String f="0001-01-01";
+					String f="2001-01-01";
 					presentazione= caio.parse(f);
 				}
 		}

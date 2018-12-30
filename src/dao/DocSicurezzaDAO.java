@@ -43,6 +43,7 @@ public class DocSicurezzaDAO {
 	
 	
 public static List<DocSicurezza> documentisicurezza(int id){
+	Locale.setDefault(Locale.ITALIAN);
 		
 		List<DocSicurezza> s=new ArrayList<DocSicurezza>();
 		
@@ -62,7 +63,7 @@ public static List<DocSicurezza> documentisicurezza(int id){
 			int compar=0;
 			SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
 				 Date datas=g.getDate("sicurezzadoc.data");
-				 String u="0001-01-01";
+				 String u="2001-01-01";
 					
 					Date date3=formdata.parse(u);
 				 
@@ -111,6 +112,7 @@ public static List<DocSicurezza> documentisicurezza(int id){
 
 
 public static List<DocPrivacy> documentiprivacy(int id){
+	Locale.setDefault(Locale.ITALIAN);
 	
 	List<DocPrivacy> s=new ArrayList<DocPrivacy>();
 	
@@ -143,6 +145,7 @@ public static List<DocPrivacy> documentiprivacy(int id){
 
 
 public static List<DocPrivacy> documentihaccp(int id){
+	Locale.setDefault(Locale.ITALIAN);
 	
 	List<DocPrivacy> s=new ArrayList<DocPrivacy>();
 	
@@ -179,6 +182,7 @@ public static List<DocPrivacy> documentihaccp(int id){
 
 
 public static void aggiornadocsic(String dat, int idd){
+	Locale.setDefault(Locale.ITALIAN);
 	try {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -199,6 +203,7 @@ public static void aggiornadocsic(String dat, int idd){
 
 
 public static void aggiornadocpriv(String dat, int idd){
+	Locale.setDefault(Locale.ITALIAN);
 	try {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -218,6 +223,7 @@ public static void aggiornadocpriv(String dat, int idd){
 }
 
 public static void aggiornadochaccp(String dat, int idd){
+	Locale.setDefault(Locale.ITALIAN);
 	try {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
