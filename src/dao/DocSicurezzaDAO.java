@@ -142,6 +142,38 @@ public static List<DocPrivacy> documentiprivacy(int id){
 }
 
 
+public static List<DocPrivacy> documentihaccp(int id){
+	
+	List<DocPrivacy> s=new ArrayList<DocPrivacy>();
+	
+	try {
+		Database.connect();
+		ResultSet g=Database.selectRecord("documentihaccp,haccpdoc","haccpdoc.idazienda="+ id + " AND haccpdoc.iddochaccp=documentihaccp.id");
+		while(g.next()) {
+			int idd=g.getInt("haccpdoc.id");
+			
+			String documento=g.getString("documento");
+			SimpleDateFormat formdata = new SimpleDateFormat("yyyy-MM-dd");
+			 Date datas=g.getDate("haccpdoc.data");
+			//if(g.getDate("data").equals(0)) {
+			//String datap="00/00/00";
+			 //DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+		      //datas = dateFormat.parse(datap);
+			//}else {
+		
+			int flag=g.getInt("flag");
+			DocPrivacy f=new DocPrivacy(idd,documento,flag,datas);
+			s.add(f);
+		}
+		Database.close();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return s;
+}
+
+
 
 
 
@@ -178,6 +210,25 @@ public static void aggiornadocpriv(String dat, int idd){
 		System.out.println("cambio flaggggg"+ idd);
 		
 		Database.updateRecord("privacydoc",agg,"privacydoc.id="+idd);
+		Database.close();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
+public static void aggiornadochaccp(String dat, int idd){
+	try {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+	      Date datas = simpleDateFormat.parse(dat);
+		Map<String,Object> agg=new HashMap<String,Object>();
+		Database.connect();
+		agg.put("data",simpleDateFormat.format(datas));
+		agg.put("flag", 1);
+		System.out.println("cambio flaggggg"+ idd);
+		
+		Database.updateRecord("haccpdoc",agg,"haccpdoc.id="+idd);
 		Database.close();
 	} catch (Exception e) {
 		// TODO Auto-generated catch block

@@ -140,6 +140,14 @@
     <servlet-name>Haccp</servlet-name>
     <url-pattern>/haccp</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>DocHaccp</servlet-name>
+    <servlet-class>Servlets.DocHaccp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DocHaccp</servlet-name>
+    <url-pattern>/dochaccp</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>Antincendio</servlet-name>
     <servlet-class>Servlets.Antincendio</servlet-class>
